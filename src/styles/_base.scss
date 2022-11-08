@@ -1,0 +1,28 @@
+:root {
+  --clr-title: #d04f4f;
+  --clr-ingredients: #3282f7;
+  --clr-equipment: #68d9a4;
+  --clr-utensil: #ed6454;
+  --clr-card-infos-bg: #e7e7e7;
+  --clr-card-image-bg: #c7bebe;
+
+  --font-main-title: 36px;
+  --font-card-heading: 18px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  margin: 0 auto;
+  min-height: 100vh;
+  margin: 42px 100px;
+}
+
+a {
+  text-decoration: none;
+}
