@@ -1,0 +1,1 @@
+export const recipesContainer = document.querySelector(".recipes");
