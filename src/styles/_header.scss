@@ -1,0 +1,11 @@
+header {
+  color: var(--clr-title);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-size: var(--font-main-title);
+    padding-block: 5px;
+  }
+}
