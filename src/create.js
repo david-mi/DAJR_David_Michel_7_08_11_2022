@@ -9,8 +9,12 @@ export const createRecipeCard = (recipe) => {
   const recipeIngredientsHtml = createIngredientsHtml(recipe.ingredients);
   return `
   <article class="recipe-card">
+    <img class="recipe-picture" src="./assets/food.png">
     <h2 class="recipe-title">${recipe.name}</h2>
-    <h3 class="recipe-duration">${recipe.time}min</h3>
+    <h3 class="recipe-duration">
+    <img class="clock-icon" src="./assets/icons/clock.svg">
+    ${recipe.time}min
+    </h3>
     <ul class="recipe-ingredients">${recipeIngredientsHtml}</ul>
     <p class="recipe-instructions">${recipe.description}</p>
   </article>
