@@ -23,15 +23,21 @@ body {
   font-family: "DM Sans", sans-serif;
   margin: 0 auto;
   min-height: 100vh;
-  margin-inline: clamp(10px, 5vw, 100px);
+  margin-inline: clamp(10px, 3vw, 100px);
   margin-block: clamp(20px, 4vw, 42px);
 }
 
 main {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 a {
   text-decoration: none;
+  color: black;
+}
+
+ul {
+  list-style-type: none;
 }

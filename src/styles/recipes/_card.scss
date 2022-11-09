@@ -1,0 +1,105 @@
+@use "../mixins" as *;
+
+.recipe-link {
+  flex: 1 1 auto;
+  width: 380px;
+  height: 364px;
+
+  @include mobile {
+    width: 100%;
+    height: auto;
+  }
+
+  &:hover .recipe-card {
+    background-color: var(--clr-grey-dark);
+  }
+}
+
+.recipe-card {
+  display: grid;
+  gap: 20px;
+  height: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 178px auto auto;
+  grid-template-areas:
+    "img img"
+    "top top"
+    "ingredients instructions";
+
+  border-radius: 5px;
+  padding-bottom: 20px;
+  background-color: var(--clr-grey-light);
+  padding-inline: clamp(5px, 2vw, 20px);
+  overflow: hidden;
+  transition: 300ms;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    grid-template-rows: 178px auto auto auto;
+    grid-template-areas:
+      "img"
+      "top"
+      "ingredients"
+      "instructions";
+  }
+
+  .recipe-picture {
+    grid-area: img;
+    width: calc(100% + 40px);
+    height: 100%;
+    object-fit: cover;
+    margin-inline: -20px;
+  }
+
+  .recipe-top {
+    grid-area: top;
+    display: flex;
+    align-items: center;
+
+    .recipe-title,
+    .recipe-duration {
+      font-size: var(--font-card-heading);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .recipe-title {
+      font-weight: normal;
+      margin-right: auto;
+    }
+
+    .recipe-duration {
+      justify-self: flex-end;
+    }
+
+    .recipe-clock {
+      margin-right: 5px;
+      height: 20px;
+    }
+  }
+
+  .recipe-ingredients,
+  .recipe-instructions {
+    font-size: 12px;
+    text-overflow: ellipsis;
+  }
+
+  .recipe-ingredients {
+    grid-area: ingredients;
+
+    .ingredient-name {
+      font-weight: bold;
+    }
+  }
+
+  .recipe-instructions {
+    grid-area: instructions;
+    display: -webkit-box;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 82px;
+  }
+}

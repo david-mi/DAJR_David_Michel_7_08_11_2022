@@ -8,16 +8,18 @@ import "./data/types.js";
 export const createRecipeCard = (recipe) => {
   const recipeIngredientsHtml = createIngredientsHtml(recipe.ingredients);
   return `
-  <article class="recipe-card">
-    <img class="recipe-picture" src="./assets/food.png">
-    <h2 class="recipe-title">${recipe.name}</h2>
-    <h3 class="recipe-duration">
-    <img class="clock-icon" src="./assets/icons/clock.svg">
-    ${recipe.time}min
-    </h3>
-    <ul class="recipe-ingredients">${recipeIngredientsHtml}</ul>
-    <p class="recipe-instructions">${recipe.description}</p>
-  </article>
+  <a href="#" class="recipe-link" title="${recipe.name}">
+    <article class="recipe-card">
+      <img class="recipe-picture" src="./assets/food.png">
+      <div class="recipe-top">
+        <h2 class="recipe-title">${recipe.name}</h2>
+        <img class="recipe-clock" src="./assets/icons/clock.svg">
+        <h3 class="recipe-duration">${recipe.time}min</h3>
+      </div>
+      <ul class="recipe-ingredients">${recipeIngredientsHtml}</ul>
+      <p class="recipe-instructions">${recipe.description}</p>
+    </article>
+  </a>
   `;
 };
 
