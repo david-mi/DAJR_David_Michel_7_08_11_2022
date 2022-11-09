@@ -1,4 +1,4 @@
-import "./types.js";
+import "./data/types.js";
 
 /**
  * @param {Recipe} recipe 

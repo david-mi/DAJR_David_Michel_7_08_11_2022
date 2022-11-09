@@ -34,10 +34,6 @@ module.exports = {
         {
           from: "./public/assets",
           to: "./assets"
-        },
-        {
-          from: "./public/recipes.json",
-          to: "./recipes.json"
         }
       ]
     }),

@@ -1,13 +1,13 @@
 import "./styles/index.scss";
-import { getApiData } from "./api.js";
 import { createRecipeCard } from "./create";
 import { displayRecipeToDom } from "./display";
 import { recipesContainer } from "./constants";
+import { recipes } from "./data/recipes";
 
 /**
  * - Reset {@link recipesContainer} html content
  * - Create each recipe html string and insert it to {@link recipesContainer}
- * @param {Recipe[]} recipes 
+ * @param {recipes} recipes 
  */
 
 const createAndDisplayRecipes = (recipes) => {
@@ -20,7 +20,4 @@ const createAndDisplayRecipes = (recipes) => {
   });
 };
 
-(async () => {
-  const recipes = await getApiData();
-  createAndDisplayRecipes(recipes);
-})();
+createAndDisplayRecipes(recipes);
