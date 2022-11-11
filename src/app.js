@@ -1,23 +1,23 @@
 import "./styles/index.scss";
+import "./handlers.js";
 import { createRecipeCard } from "./create";
 import { displayRecipeToDom } from "./display";
 import { recipesContainer } from "./constants";
-import { recipes } from "./data/recipes";
+import { recipesData } from "./data/data";
 
 /**
  * - Reset {@link recipesContainer} html content
  * - Create each recipe html string and insert it to {@link recipesContainer}
- * @param {recipes} recipes 
+ * @param {Recipe[]} recipes 
  */
 
-const createAndDisplayRecipes = (recipes) => {
+export const createAndDisplayRecipes = (recipes) => {
   recipesContainer.innerHTML = "";
 
   recipes.forEach(recipe => {
     const card = createRecipeCard(recipe);
     displayRecipeToDom(card);
-    console.log(card);
   });
 };
 
-createAndDisplayRecipes(recipes);
+createAndDisplayRecipes(recipesData.recipe);
