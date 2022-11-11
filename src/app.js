@@ -20,4 +20,4 @@ export const createAndDisplayRecipes = (recipes) => {
   });
 };
 
-createAndDisplayRecipes(recipesData.recipe);
+createAndDisplayRecipes(recipesData.full);
