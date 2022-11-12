@@ -1,7 +1,6 @@
 .recipes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  max-width: 1240px;
+  display: grid;
   align-self: center;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
 }

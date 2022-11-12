@@ -1,15 +1,6 @@
 @use "../mixins" as *;
 
 .recipe-link {
-  flex: 1 1 auto;
-  width: 380px;
-  height: 364px;
-
-  @include mobile {
-    width: 100%;
-    height: auto;
-  }
-
   &:hover .recipe-card {
     background-color: var(--clr-grey-dark);
   }
@@ -82,7 +73,6 @@
   .recipe-ingredients,
   .recipe-instructions {
     font-size: 12px;
-    text-overflow: ellipsis;
   }
 
   .recipe-ingredients {
@@ -99,6 +89,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
     overflow: hidden;
     height: 82px;
   }
