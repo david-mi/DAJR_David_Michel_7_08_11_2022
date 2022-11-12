@@ -6,6 +6,6 @@ import { recipesContainer } from "./constants";
  * @param {string} recipeHtml
  */
 
-export const displayRecipeToDom = (recipeHtml) => {
-  recipesContainer?.insertAdjacentHTML("beforeend", recipeHtml);
+export const displayRecipe = (recipeHtml) => {
+  recipesContainer.insertAdjacentHTML("beforeend", recipeHtml);
 };

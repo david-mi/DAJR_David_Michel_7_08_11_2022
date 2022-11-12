@@ -1,7 +1,7 @@
 import "./styles/index.scss";
 import "./handlers.js";
 import { createRecipeCard } from "./create";
-import { displayRecipeToDom } from "./display";
+import { displayRecipe } from "./display";
 import { recipesContainer } from "./constants";
 import { recipesData } from "./data/data";
 
@@ -16,7 +16,7 @@ export const createAndDisplayRecipes = (recipes) => {
 
   recipes.forEach(recipe => {
     const card = createRecipeCard(recipe);
-    displayRecipeToDom(card);
+    displayRecipe(card);
   });
 };
 

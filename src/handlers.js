@@ -17,9 +17,9 @@ form.addEventListener("submit", handleFormSubmit);
 function handleSearchInput() {
   const userInput = searchInput.value.toLowerCase().trim();
 
-  if (
-    userInput.length < 3 && recipesData.filtered.length === recipesData.full.length
-  ) return;
+  if (userInput.length < 3 && recipesData.filtered.length === recipesData.full.length) {
+    return;
+  }
 
   if (!isPasting && previousInput.length > 0 && userInput.length > previousInput.length) {
     recipesData.filtered = filterRecipes(userInput, recipesData.filtered);
