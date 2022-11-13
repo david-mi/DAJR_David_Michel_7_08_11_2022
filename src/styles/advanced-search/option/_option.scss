@@ -1,0 +1,32 @@
+@use "../../mixins" as *;
+
+.advanced-search {
+  .option {
+    position: relative;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    height: fit-content;
+
+    @include medium {
+      width: 100%;
+    }
+
+    &[data-display] {
+      z-index: 99;
+    }
+
+    &.ingredients {
+      background-color: var(--clr-ingredients);
+    }
+
+    &.ustensils {
+      background-color: var(--clr-utensil);
+    }
+
+    &.appliance {
+      background-color: var(--clr-appliance);
+    }
+  }
+}

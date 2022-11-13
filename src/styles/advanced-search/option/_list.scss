@@ -1,0 +1,20 @@
+.advanced-search {
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc((667px - 32px) / 3), 1fr));
+    padding-inline: 16px;
+    flex: 1;
+    max-width: 667px;
+    width: 100%;
+
+    li {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 5px;
+      &:hover {
+        backdrop-filter: brightness(85%);
+      }
+    }
+  }
+}
