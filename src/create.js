@@ -10,10 +10,10 @@ export const createRecipeCard = (recipe) => {
   return `
   <a href="#" class="recipe-link" title="${recipe.name}">
     <article class="recipe-card">
-      <img class="recipe-picture" src="./assets/food.png">
+      <img class="recipe-picture" src="./assets/food.png" alt="${recipe.name}">
       <div class="recipe-top">
         <h2 class="recipe-title">${recipe.name}</h2>
-        <img class="recipe-clock" src="./assets/icons/clock.svg">
+        <img class="recipe-clock" src="./assets/icons/clock.svg" alt="icône de minuteur">
         <h3 class="recipe-duration">${recipe.time}min</h3>
       </div>
       <ul class="recipe-ingredients">${recipeIngredientsHtml}</ul>
