@@ -84,14 +84,15 @@
         padding-inline: 20px;
         position: absolute;
         inset: 0;
+        width: 100%;
 
         img {
           transition: 300ms;
         }
 
         &.expand {
+          width: auto;
           position: static;
-          left: calc(100% - 55px);
 
           img {
             transform: rotate(180deg);
