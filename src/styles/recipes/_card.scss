@@ -79,11 +79,12 @@
     grid-area: ingredients;
 
     .ingredient-name {
-      font-weight: bold;
+      font-weight: 700;
     }
   }
 
   .recipe-instructions {
+    font-family: "Roboto", sans-serif;
     grid-area: instructions;
     display: -webkit-box;
     display: -webkit-box;
