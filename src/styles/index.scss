@@ -1,6 +1,8 @@
+@use "./classes";
 @use "./base";
 @use "./header";
 @use "./search/search.scss";
 @use "./search/form/form";
 @use "./recipes/recipes";
 @use "./recipes/card";
+@use "./advanced-search/advanced-search";

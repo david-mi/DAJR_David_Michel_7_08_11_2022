@@ -1,0 +1,122 @@
+@use "../mixins" as *;
+
+.advanced-search {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  position: relative;
+  z-index: 10;
+
+  * {
+    font-size: 18px;
+    color: white;
+  }
+
+  .bg-fixed {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    z-index: 10;
+  }
+
+  .option {
+    position: relative;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    height: fit-content;
+
+    @include medium {
+      width: 100%;
+    }
+
+    &[data-display] {
+      z-index: 99;
+    }
+
+    &.ingredients {
+      background-color: var(--clr-ingredients);
+    }
+
+    &.ustensils {
+      background-color: var(--clr-utensil);
+    }
+
+    &.appliance {
+      background-color: var(--clr-appliance);
+    }
+
+    form {
+      position: relative;
+      display: flex;
+
+      .option-title {
+        padding: 20px 70px 20px 20px;
+        cursor: pointer;
+      }
+
+      input {
+        width: 100%;
+        font-family: "Lato", sans-serif;
+        background-color: transparent;
+        border: none;
+        padding-left: 20px;
+        height: 60px;
+        font-weight: 700;
+
+        &::placeholder {
+          opacity: 0.5;
+          color: white;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .dropdown-btn {
+        display: grid;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: transparent;
+        border: none;
+        padding-inline: 20px;
+        position: absolute;
+        inset: 0;
+
+        img {
+          transition: 300ms;
+        }
+
+        &.expand {
+          position: static;
+          left: calc(100% - 55px);
+
+          img {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+
+    .list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(calc((667px - 32px) / 3), 1fr));
+      padding-inline: 16px;
+      flex: 1;
+      max-width: 667px;
+      width: 100%;
+
+      li {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px;
+        &:hover {
+          backdrop-filter: brightness(85%);
+        }
+      }
+    }
+  }
+}
