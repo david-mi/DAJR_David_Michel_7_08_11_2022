@@ -41,3 +41,9 @@ const createIngredientsHtml = (ingredients) => {
     `;
   }, "");
 };
+
+export const createOptionContent = (option) => {
+  return `
+  <li>${option}</li>
+  `;
+};

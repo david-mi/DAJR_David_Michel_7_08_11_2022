@@ -1,7 +1,7 @@
 import "./styles/index.scss";
 import "./handlers.js";
-import { createRecipeCard } from "./create";
-import { displayRecipe } from "./display";
+import { createRecipeCard, createOptionContent } from "./create";
+import { displayRecipe, displayOptionsListsContent } from "./display";
 import { recipesContainer } from "./constants";
 import { recipesData } from "./data/data";
 
@@ -20,4 +20,34 @@ export const createAndDisplayRecipes = (recipes) => {
   });
 };
 
+const createAndDisplayOptionsLists = (recipes) => {
+  recipes.forEach(recipe => {
+    recipesData.appliances[recipe.appliance] = recipe.appliance;
+
+    recipe.ingredients.forEach(({ ingredient }) => {
+      recipesData.ingredients[ingredient] = ingredient;
+    });
+
+    recipe.ustensils.forEach(ustensil => {
+      recipesData.ustensils[ustensil] = ustensil;
+    });
+  });
+
+  for (const key in recipesData.ingredients) {
+    const ingredientElement = createOptionContent(recipesData.ingredients[key]);
+    displayOptionsListsContent(ingredientElement, ingredientsListContainer);
+  }
+
+  for (const key in recipesData.appliances) {
+    const applianceElement = createOptionContent(recipesData.appliances[key]);
+    displayOptionsListsContent(applianceElement, applianceListContainer);
+  }
+
+  for (const key in recipesData.ustensils) {
+    const ustensilElement = createOptionContent(recipesData.ustensils[key]);
+    displayOptionsListsContent(ustensilElement, ustensilsListContainer);
+  }
+};
+
 createAndDisplayRecipes(recipesData.full);
+createAndDisplayOptionsLists(recipesData.full);

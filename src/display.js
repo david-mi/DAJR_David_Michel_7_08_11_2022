@@ -76,3 +76,7 @@ export const triggerClickOnDisplayedOptionButton = () => {
   const clickEvent = new Event("click");
   currentDisplayedOptionButton.dispatchEvent(clickEvent);
 };
+
+export const displayOptionsListsContent = (element, container) => {
+  container.insertAdjacentHTML("beforeend", element);
+};
