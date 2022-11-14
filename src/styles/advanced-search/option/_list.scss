@@ -2,10 +2,12 @@
   .list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(calc((667px - 32px) / 3), 1fr));
-    padding-inline: 16px;
+    padding: 16px;
     flex: 1;
     max-width: 667px;
     width: 100%;
+    overflow-y: auto;
+    max-height: 400px;
 
     li {
       display: flex;
