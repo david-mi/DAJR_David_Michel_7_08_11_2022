@@ -26,3 +26,13 @@
  * @type {string[]}
  */
 
+/**
+ * @typedef RecipeData
+ * @type {{
+ *  filtered: Recipe[] | [],
+ *  full: Recipe[],
+ *  ingredients: null | Set<String>,
+ *  appliances: null | Set<String>
+ *  ustensils: null | Set<String>
+ * }}
+ */

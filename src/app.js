@@ -3,7 +3,7 @@ import "./handlers.js";
 import { createRecipeCard, createOptionContent } from "./create";
 import { displayRecipe, displayOptionsListsContent } from "./display";
 import { recipesContainer } from "./constants";
-import { recipesData } from "./data/data";
+import { recipesData } from "./data/recipesData";
 
 const ingredientsListContainer = document.querySelector(".ingredients ul");
 const applianceListContainer = document.querySelector(".appliance ul");

@@ -1,5 +1,5 @@
 import { filterRecipes } from "./filter";
-import { recipesData } from "./data/data";
+import { recipesData } from "./data/recipesData";
 import { createAndDisplayRecipes } from "./app";
 import { toggleDisplayOptionsLists, triggerClickOnDisplayedOptionButton } from "./display";
 
