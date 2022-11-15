@@ -11,7 +11,12 @@ optionsDropdownButtons.forEach(button => {
   button.addEventListener("click", toggleDisplayOptionsLists);
 });
 
-
+const optionsForms = document.querySelectorAll(".option form");
+optionsForms.forEach(optionsForm => {
+  optionsForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+});
 
 const optionsInputs = document.querySelectorAll(".option input");
 
@@ -34,3 +39,17 @@ function triggerClickOnActiveDropdownButton() {
   currentDisplayedOptionButton.dispatchEvent(clickEvent);
 }
 
+export function handleSearchOptionInput({ target }) {
+  const targetOption = target.dataset.option;
+
+  const optionListContainer = document.querySelector(`ul[data-option="${targetOption}"]`);
+  optionListContainer.innerHTML = "";
+
+  const userInput = target.value.toLowerCase().trim();
+  const filteredOptions = filterAndSortOptions(userInput, recipesData[targetOption]);
+
+  filteredOptions.forEach(filteredOption => {
+    const optionElement = createOptionElement(filteredOption);
+    displayOptionListElements(optionElement, optionListContainer);
+  });
+}
