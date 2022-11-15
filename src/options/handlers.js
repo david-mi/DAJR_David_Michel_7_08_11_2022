@@ -1,10 +1,10 @@
-import { filterOption } from "./filter";
+import { filterAndSortOptions } from "./filter";
 import { recipesData } from "../data/recipesData";
 import { createOptionElement } from "./create";
 import { displayOptionListElements, toggleDisplayOptionsLists } from "./display.js";
 
 const backgroundHideOptions = document.querySelector(".bg-fixed");
-backgroundHideOptions.addEventListener("click", triggerClickOnDisplayedOptionButton);
+backgroundHideOptions.addEventListener("click", triggerClickOnActiveDropdownButton);
 
 const optionsDropdownButtons = document.querySelectorAll(".dropdown-btn");
 optionsDropdownButtons.forEach(button => {
@@ -27,7 +27,7 @@ optionsInputs.forEach(optionInput => {
  * - Dispatch a click event on it
  */
 
-function triggerClickOnDisplayedOptionButton() {
+function triggerClickOnActiveDropdownButton() {
   const currentDisplayedOption = document.querySelector("[data-display]");
   const currentDisplayedOptionButton = currentDisplayedOption.querySelector(".dropdown-btn");
   const clickEvent = new Event("click");

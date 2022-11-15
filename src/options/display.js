@@ -9,9 +9,8 @@ export const toggleDisplayOptionsLists = ({ currentTarget }) => {
   const chosenOption = currentTarget.dataset.option;
   currentTarget.toggleAttribute("data-display");
 
-  const targetOptionElement = currentTarget.closest(".option");
+  const targetOptionElement = document.querySelector(`.option[data-option="${chosenOption}"] `);
   targetOptionElement.toggleAttribute("data-display");
-
 
   const elementsWhereToToggleDisplay = document.querySelectorAll(`.bg-fixed, [data-option="${chosenOption}"] :is(ul, h2, input)`);
   elementsWhereToToggleDisplay.forEach(element => {

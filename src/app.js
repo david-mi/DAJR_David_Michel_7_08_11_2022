@@ -47,7 +47,7 @@ const resetOptionsLists = () => {
  * @param {HTMLElement} containerElement 
  */
 
-const sortAndDisplaySetData = (set, containerElement) => {
+const sortAndDisplayOptionsData = (set, containerElement) => {
   [...set]
     .sort()
     .forEach(element => {
@@ -76,9 +76,9 @@ const createAndDisplayOptionsLists = (recipes) => {
     });
   });
 
-  sortAndDisplaySetData(recipesData.ingredients, ingredientsListContainer);
-  sortAndDisplaySetData(recipesData.appliances, appliancesListContainer);
-  sortAndDisplaySetData(recipesData.ustensils, ustensilsListContainer);
+  sortAndDisplayOptionsData(recipesData.ingredients, ingredientsListContainer);
+  sortAndDisplayOptionsData(recipesData.appliances, appliancesListContainer);
+  sortAndDisplayOptionsData(recipesData.ustensils, ustensilsListContainer);
 };
 
 createAndDisplayRecipes(recipesData.full);
