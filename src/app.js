@@ -5,6 +5,10 @@ import { displayRecipe, displayOptionsListsContent } from "./display";
 import { recipesContainer } from "./constants";
 import { recipesData } from "./data/data";
 
+const ingredientsListContainer = document.querySelector(".ingredients ul");
+const applianceListContainer = document.querySelector(".appliance ul");
+const ustensilsListContainer = document.querySelector(".ustensils ul");
+
 /**
  * - Reset {@link recipesContainer} html content
  * - Create each recipe html string and insert it to {@link recipesContainer}
