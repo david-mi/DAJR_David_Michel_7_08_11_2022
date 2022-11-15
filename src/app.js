@@ -61,7 +61,7 @@ const sortAndDisplayOptionsData = (set, containerElement) => {
  * @param {Recipe} recipes 
  */
 
-const createAndDisplayOptionsLists = (recipes) => {
+export const createAndDisplayOptionsLists = (recipes) => {
   resetOptionsLists();
 
   recipes.forEach(({ ingredients, appliance, ustensils }) => {

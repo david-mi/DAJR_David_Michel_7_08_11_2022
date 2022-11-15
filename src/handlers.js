@@ -1,6 +1,6 @@
 import { filterRecipes } from "./filter";
 import { recipesData } from "./data/recipesData";
-import { createAndDisplayRecipes } from "./app";
+import { createAndDisplayRecipes, createAndDisplayOptionsLists } from "./app";
 
 let isPasting = false;
 let previousInput = "";
@@ -30,6 +30,7 @@ function handleMainSearchInput() {
   }
 
   createAndDisplayRecipes(recipesData.filtered);
+  createAndDisplayOptionsLists(recipesData.filtered);
   isPasting = false;
   previousInput = userInput;
 }
