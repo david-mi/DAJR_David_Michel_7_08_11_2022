@@ -11,6 +11,14 @@ optionsDropdownButtons.forEach(button => {
   button.addEventListener("click", toggleDisplayOptionsLists);
 });
 
+
+
+const optionsInputs = document.querySelectorAll(".option input");
+
+optionsInputs.forEach(optionInput => {
+  optionInput.addEventListener("input", handleSearchOptionInput);
+});
+
 /**
  *  Gets called when clicking on the transparent background behind opened options
  * 

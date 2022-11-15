@@ -13,7 +13,7 @@ export const toggleDisplayOptionsLists = ({ currentTarget }) => {
   targetOptionElement.toggleAttribute("data-display");
 
 
-  const elementsWhereToToggleDisplay = document.querySelectorAll(`.bg-fixed, .${chosenOption} :is(ul, h2, input)`);
+  const elementsWhereToToggleDisplay = document.querySelectorAll(`.bg-fixed, [data-option="${chosenOption}"] :is(ul, h2, input)`);
   elementsWhereToToggleDisplay.forEach(element => {
     element.classList.toggle("display-none");
   });
@@ -30,7 +30,7 @@ export const toggleDisplayOptionsLists = ({ currentTarget }) => {
  */
 
 function toggleRotateOptionIconButton(chosenOption) {
-  const optionButtonElement = document.querySelector(`.${chosenOption} .dropdown-btn`);
+  const optionButtonElement = document.querySelector(`[data-option="${chosenOption}"] .dropdown-btn`);
   optionButtonElement.classList.toggle("expand");
 }
 
@@ -42,7 +42,7 @@ function toggleRotateOptionIconButton(chosenOption) {
  */
 
 function handleOptionDisplayInput(chosenOption) {
-  const optionInputElement = document.querySelector(`.${chosenOption} input`);
+  const optionInputElement = document.querySelector(`[data-option="${chosenOption}"] input`);
   if (optionInputElement.classList.contains("display-none")) {
     optionInputElement.value = "";
   } else {
