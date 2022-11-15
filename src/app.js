@@ -17,10 +17,16 @@ import { recipesData } from "./data/recipesData";
 export const createAndDisplayRecipes = (recipes) => {
   recipesContainer.innerHTML = "";
 
-  recipes.forEach(recipe => {
-    const card = createRecipeHtml(recipe);
-    displayRecipe(card);
-  });
+  if (recipes.length !== 0) {
+    recipes.forEach(recipe => {
+      const card = createRecipeHtml(recipe);
+      displayRecipe(card);
+    });
+  } else {
+    const emptyMessageWarning = recipesContainer.dataset.empty;
+    const emptyListHtml = `<p>${emptyMessageWarning}</p>`;
+    recipesContainer.insertAdjacentHTML("beforeend", emptyListHtml);
+  }
 };
 
 /**

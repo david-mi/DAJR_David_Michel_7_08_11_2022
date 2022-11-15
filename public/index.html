@@ -33,7 +33,7 @@
             <img src="./assets/icons/arrow.svg" alt="icône de flèche">
           </button>
         </form>
-        <ul class="list display-none" data-option="ingredients"></ul>
+        <ul class="list display-none" data-option="ingredients" data-empty="Aucun ingrédient ne correspond à votre critère…"></ul>
       </div>
 
       <div class="option" data-option="appliances">
@@ -44,7 +44,7 @@
             <img src="./assets/icons/arrow.svg" alt="icône de flèche">
           </button>
         </form>
-        <ul class="list display-none" data-option="appliances"></ul>
+        <ul class="list display-none" data-option="appliances" data-empty="Aucun appareil ne correspond à votre critère…"></ul>
       </div>
 
       <div class="option" data-option="ustensils">
@@ -55,11 +55,12 @@
             <img src="./assets/icons/arrow.svg" alt="icône de flèche">
           </button>
         </form>
-        <ul class="list display-none" data-option="ustensils"></ul>
+        <ul class="list display-none" data-option="ustensils" data-empty="Aucun ustensile ne correspond à votre critère…">
+        </ul>
       </div>
     </div>
 
-    <div class="recipes"></div>
+    <div class="recipes" data-empty="Aucune recette ne correspond à votre critère…"></div>
   </main>
 </body>
 

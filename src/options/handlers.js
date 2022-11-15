@@ -48,8 +48,15 @@ export function handleSearchOptionInput({ target }) {
   const userInput = target.value.toLowerCase().trim();
   const filteredOptions = filterAndSortOptions(userInput, recipesData[targetOption]);
 
-  filteredOptions.forEach(filteredOption => {
-    const optionElement = createOptionElement(filteredOption);
-    displayOptionListElements(optionElement, optionListContainer);
-  });
+  if (filteredOptions.length !== 0) {
+    filteredOptions.forEach(filteredOption => {
+      const optionElement = createOptionElement(filteredOption);
+      displayOptionListElements(optionElement, optionListContainer);
+    });
+  } else {
+    const emptyMessageWarning = optionListContainer.dataset.empty;
+    const emptyListHtml = `<p>${emptyMessageWarning}</p>`;
+    optionListContainer.insertAdjacentHTML("beforeend", emptyListHtml);
+  }
+
 }
