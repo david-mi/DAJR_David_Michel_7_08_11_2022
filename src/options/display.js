@@ -45,6 +45,8 @@ function handleOptionDisplayInput(chosenOption) {
   const optionInputElement = document.querySelector(`[data-option="${chosenOption}"] input`);
   if (optionInputElement.classList.contains("display-none")) {
     optionInputElement.value = "";
+    const inputEvent = new Event("input");
+    optionInputElement.dispatchEvent(inputEvent);
   } else {
     optionInputElement.focus();
   }
