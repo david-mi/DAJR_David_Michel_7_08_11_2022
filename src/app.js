@@ -24,33 +24,62 @@ export const createAndDisplayRecipes = (recipes) => {
   });
 };
 
-const createAndDisplayOptionsLists = (recipes) => {
-  recipes.forEach(recipe => {
-    recipesData.appliances[recipe.appliance] = recipe.appliance;
+/**
+ * Reset options lists data and html content
+ */
 
-    recipe.ingredients.forEach(({ ingredient }) => {
-      recipesData.ingredients[ingredient] = ingredient;
+const resetOptionsLists = () => {
+  ingredientsListContainer.innerHTML = "";
+  applianceListContainer.innerHTML = "";
+  ustensilsListContainer.innerHTML = "";
+
+  recipesData.ingredients = new Set();
+  recipesData.appliances = new Set();
+  recipesData.ustensils = new Set();
+};
+
+/**
+ * - Convert a Set of strings into array
+ * - Sort array in alphabetical order
+ * - Iterate through created array, create Element and insert it
+ *  into {@link containerElement}
+ * 
+ * @param {Set<String>} set 
+ * @param {HTMLElement} containerElement 
+ */
+
+const sortAndDisplaySetData = (set, containerElement) => {
+  [...set]
+    .sort()
+    .forEach(element => {
+      const optionElement = createOptionContent(element);
+      displayOptionsListsContent(optionElement, containerElement);
+    });
+};
+
+/**
+ * Create and display every options for recipes
+ * @param {Recipe} recipes 
+ */
+
+const createAndDisplayOptionsLists = (recipes) => {
+  resetOptionsLists();
+
+  recipes.forEach(({ ingredients, appliance, ustensils }) => {
+    recipesData.appliances.add(appliance);
+
+    ingredients.forEach(({ ingredient }) => {
+      recipesData.ingredients.add(ingredient);
     });
 
-    recipe.ustensils.forEach(ustensil => {
-      recipesData.ustensils[ustensil] = ustensil;
+    ustensils.forEach(ustensil => {
+      recipesData.ustensils.add(ustensil);
     });
   });
 
-  for (const key in recipesData.ingredients) {
-    const ingredientElement = createOptionContent(recipesData.ingredients[key]);
-    displayOptionsListsContent(ingredientElement, ingredientsListContainer);
-  }
-
-  for (const key in recipesData.appliances) {
-    const applianceElement = createOptionContent(recipesData.appliances[key]);
-    displayOptionsListsContent(applianceElement, applianceListContainer);
-  }
-
-  for (const key in recipesData.ustensils) {
-    const ustensilElement = createOptionContent(recipesData.ustensils[key]);
-    displayOptionsListsContent(ustensilElement, ustensilsListContainer);
-  }
+  sortAndDisplaySetData(recipesData.ingredients, ingredientsListContainer);
+  sortAndDisplaySetData(recipesData.appliances, applianceListContainer);
+  sortAndDisplaySetData(recipesData.ustensils, ustensilsListContainer);
 };
 
 createAndDisplayRecipes(recipesData.full);
