@@ -1,32 +1,23 @@
 import { filterRecipes } from "./filter";
 import { recipesData } from "./data/recipesData";
 import { createAndDisplayRecipes } from "./app";
-import { toggleDisplayOptionsLists, triggerClickOnDisplayedOptionButton } from "./display";
 
 let isPasting = false;
 let previousInput = "";
 
-const searchInput = document.querySelector("input");
-searchInput.addEventListener("input", handleSearchInput);
-searchInput.addEventListener("paste", handlePasteInput);
+const mainSearchInput = document.querySelector("input");
+mainSearchInput.addEventListener("input", handleMainSearchInput);
+mainSearchInput.addEventListener("paste", handlePasteOnMainSearchInput);
 
 const mainForm = document.querySelector("form");
 mainForm.addEventListener("submit", handleMainFormSubmit);
-
-const optionsElements = document.querySelectorAll(".dropdown-btn");
-optionsElements.forEach(button => {
-  button.addEventListener("click", toggleDisplayOptionsLists);
-});
-
-const backgroundHideOptions = document.querySelector(".bg-fixed");
-backgroundHideOptions.addEventListener("click", triggerClickOnDisplayedOptionButton);
 
 /**
  * Handle user input, then filter and display recipes
  */
 
-function handleSearchInput() {
-  const userInput = searchInput.value.toLowerCase().trim();
+function handleMainSearchInput() {
+  const userInput = mainSearchInput.value.toLowerCase().trim();
 
   if (userInput.length < 3 && recipesData.filtered.length === recipesData.full.length) {
     return;
@@ -48,11 +39,11 @@ function handleSearchInput() {
  * instead of writing 
  */
 
-function handlePasteInput() {
+function handlePasteOnMainSearchInput() {
   isPasting = true;
 }
 
 function handleMainFormSubmit(event) {
   event.preventDefault();
-  handleSearchInput();
+  handleMainSearchInput();
 }

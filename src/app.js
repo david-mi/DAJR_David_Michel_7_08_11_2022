@@ -1,13 +1,12 @@
 import "./styles/index.scss";
 import "./handlers.js";
-import { createRecipeCard, createOptionContent } from "./create";
-import { displayRecipe, displayOptionsListsContent } from "./display";
-import { recipesContainer } from "./constants";
+import "./options/handlers.js";
+import { createRecipeHtml } from "./create";
+import { createOptionHtml } from "./options/create";
+import { displayRecipe } from "./display";
+import { displayOptionsListsContent } from "./options/display";
+import { recipesContainer, ingredientsListContainer, appliancesListContainer, ustensilsListContainer } from "./constants";
 import { recipesData } from "./data/recipesData";
-
-const ingredientsListContainer = document.querySelector(".ingredients ul");
-const applianceListContainer = document.querySelector(".appliance ul");
-const ustensilsListContainer = document.querySelector(".ustensils ul");
 
 /**
  * - Reset {@link recipesContainer} html content
@@ -19,7 +18,7 @@ export const createAndDisplayRecipes = (recipes) => {
   recipesContainer.innerHTML = "";
 
   recipes.forEach(recipe => {
-    const card = createRecipeCard(recipe);
+    const card = createRecipeHtml(recipe);
     displayRecipe(card);
   });
 };
@@ -30,7 +29,7 @@ export const createAndDisplayRecipes = (recipes) => {
 
 const resetOptionsLists = () => {
   ingredientsListContainer.innerHTML = "";
-  applianceListContainer.innerHTML = "";
+  appliancesListContainer.innerHTML = "";
   ustensilsListContainer.innerHTML = "";
 
   recipesData.ingredients = new Set();
@@ -52,7 +51,7 @@ const sortAndDisplaySetData = (set, containerElement) => {
   [...set]
     .sort()
     .forEach(element => {
-      const optionElement = createOptionContent(element);
+      const optionElement = createOptionHtml(element);
       displayOptionsListsContent(optionElement, containerElement);
     });
 };
@@ -78,7 +77,7 @@ const createAndDisplayOptionsLists = (recipes) => {
   });
 
   sortAndDisplaySetData(recipesData.ingredients, ingredientsListContainer);
-  sortAndDisplaySetData(recipesData.appliances, applianceListContainer);
+  sortAndDisplaySetData(recipesData.appliances, appliancesListContainer);
   sortAndDisplaySetData(recipesData.ustensils, ustensilsListContainer);
 };
 

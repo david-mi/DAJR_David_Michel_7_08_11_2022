@@ -17,15 +17,15 @@
       z-index: 99;
     }
 
-    &.ingredients {
+    &[data-option="ingredients"] {
       background-color: var(--clr-ingredients);
     }
 
-    &.ustensils {
+    &[data-option="ustensils"] {
       background-color: var(--clr-utensil);
     }
 
-    &.appliance {
+    &[data-option="appliances"] {
       background-color: var(--clr-appliance);
     }
   }

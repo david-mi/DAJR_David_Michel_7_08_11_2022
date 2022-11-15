@@ -5,8 +5,8 @@ import "./data/types.js";
  * @returns {string} Html string card structure for a recipe
  */
 
-export const createRecipeCard = (recipe) => {
-  const recipeIngredientsHtml = createIngredientsHtml(recipe.ingredients);
+export const createRecipeHtml = (recipe) => {
+  const recipeIngredientsHtml = createRecipeIngredientsHtml(recipe.ingredients);
   return `
   <a href="#" class="recipe-link" title="${recipe.name}">
     <article class="recipe-card">
@@ -28,7 +28,7 @@ export const createRecipeCard = (recipe) => {
  * @return {string} Html li strings with ingredients infos for a recipe
  */
 
-const createIngredientsHtml = (ingredients) => {
+const createRecipeIngredientsHtml = (ingredients) => {
   return ingredients.reduce((str, { ingredient, quantity, unit }) => {
     const separator = quantity || unit ? ":" : "";
     return str += `
@@ -40,10 +40,4 @@ const createIngredientsHtml = (ingredients) => {
     </li>
     `;
   }, "");
-};
-
-export const createOptionContent = (option) => {
-  return `
-  <li>${option}</li>
-  `;
 };
