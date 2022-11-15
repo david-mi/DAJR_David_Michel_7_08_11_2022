@@ -52,6 +52,6 @@ function handleOptionDisplayInput(chosenOption) {
   }
 }
 
-export const displayOptionsListsContent = (element, container) => {
-  container.insertAdjacentHTML("beforeend", element);
+export const displayOptionListElements = (element, container) => {
+  container.insertAdjacentElement("beforeend", element);
 };

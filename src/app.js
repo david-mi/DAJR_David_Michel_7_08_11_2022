@@ -2,9 +2,9 @@ import "./styles/index.scss";
 import "./handlers.js";
 import "./options/handlers.js";
 import { createRecipeHtml } from "./create";
-import { createOptionHtml } from "./options/create";
+import { createOptionElement } from "./options/create";
 import { displayRecipe } from "./display";
-import { displayOptionsListsContent } from "./options/display";
+import { displayOptionListElements } from "./options/display";
 import { recipesContainer, ingredientsListContainer, appliancesListContainer, ustensilsListContainer } from "./constants";
 import { recipesData } from "./data/recipesData";
 
@@ -51,8 +51,8 @@ const sortAndDisplaySetData = (set, containerElement) => {
   [...set]
     .sort()
     .forEach(element => {
-      const optionElement = createOptionHtml(element);
-      displayOptionsListsContent(optionElement, containerElement);
+      const optionElement = createOptionElement(element);
+      displayOptionListElements(optionElement, containerElement);
     });
 };
 

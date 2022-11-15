@@ -1,7 +1,7 @@
 import { filterOption } from "./filter";
 import { recipesData } from "../data/recipesData";
-import { createOptionHtml } from "./create";
-import { toggleDisplayOptionsLists } from "./display.js";
+import { createOptionElement } from "./create";
+import { displayOptionListElements, toggleDisplayOptionsLists } from "./display.js";
 
 const backgroundHideOptions = document.querySelector(".bg-fixed");
 backgroundHideOptions.addEventListener("click", triggerClickOnDisplayedOptionButton);
