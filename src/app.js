@@ -1,4 +1,5 @@
 import "./styles/index.scss";
+import "./resizeObserver.js";
 import "./handlers.js";
 import "./options/handlers.js";
 import { createRecipeHtml } from "./create";
@@ -55,7 +56,7 @@ const resetOptionsLists = () => {
 
 const sortAndDisplayOptionsData = (set, containerElement) => {
   [...set]
-    .sort()
+    .sort((a, b) => a.localeCompare(b))
     .forEach(element => {
       const optionElement = createOptionElement(element);
       displayOptionListElements(optionElement, containerElement);
