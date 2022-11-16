@@ -48,7 +48,7 @@ optionsInputs.forEach(optionInput => {
  */
 
 function handleMainSearchInput() {
-  const userInput = formatString(mainSearchInput.value);
+  const userInput = formatString(mainSearchInput.value).trim();
 
   if (userInput.length < 3) {
     if (recipesData.filtered.length === recipesData.recipes.length) {
@@ -62,7 +62,6 @@ function handleMainSearchInput() {
     recipesData.filtered = filterRecipes(userInput, recipesData.recipes);
   }
 
-  console.log(recipesData.filtered);
   createAndDisplayRecipes(recipesData.filtered);
   createAndDisplayOptionsLists(recipesData.filtered);
   previousInput = userInput;
