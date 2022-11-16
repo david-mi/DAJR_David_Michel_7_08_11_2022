@@ -115,7 +115,8 @@ export function handleSearchOptionInput({ target }) {
   const optionListContainer = document.querySelector(`ul[data-option="${targetOption}"]`);
   optionListContainer.innerHTML = "";
 
-  const userInput = target.value.toLowerCase().trim();
+  const userInput = formatString(target.value).trim();
+
   const filteredOptions = filterAndSortOptions(userInput, recipesData[targetOption]);
 
   if (filteredOptions.length !== 0) {
