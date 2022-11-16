@@ -1,4 +1,5 @@
 import "./data/types.js";
+import { formatString } from "./utils.js";
 
 /**
  * @param {string} userInput text input from search input in lowercase
@@ -7,43 +8,93 @@ import "./data/types.js";
  */
 
 
-// const filterforLoop = (userInput, recipes) => {
-//   const filteredRecipes = [];
-//   const recipeLength = recipes.length;
+/*****************************************/
+/*************** RECIPES *****************/
+/*****************************************/
 
-//   for (let i = 0; i < recipeLength; i++) {
-//     if (
-//       recipes[i].name.toLowerCase().indexOf(userInput) !== -1 ||
-//       recipes[i].description.toLowerCase().indexOf(userInput) !== -1
-//     ) {
-//       filteredRecipes.push(recipes[i]);
-//       continue;
-//     }
+export const filterRecipesForLoopAccents = (userInput, recipes) => {
+  const filteredRecipes = [];
 
-//     const ingredientsLength = recipes[i].ingredients.length;
+  function isStrIncluded(strToCompare, str) {
+    if (str.length === 0) return true;
 
-//     for (let j = 0; j < ingredientsLength; j++) {
-//       if (recipes[i].ingredients[j].ingredient.toLowerCase().indexOf(userInput) !== -1) {
-//         filteredRecipes.push(recipes[i]);
-//         break;
-//       }
-//     }
-//   }
+    for (let i = 0; i < strToCompare.length; i++) {
+      let matchCount = 0;
 
-//   return filteredRecipes;
-// };
+      for (let k = 0; k < str.length; k++) {
+        if (strToCompare[i + k] === str[k]) {
+          matchCount++;
+        } else {
+          matchCount = 0;
+        }
+
+        if (matchCount === str.length) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  for (let i = 0; i < recipes.length; i++) {
+    if (
+      isStrIncluded(formatString(recipes[i].name), userInput) ||
+      isStrIncluded(formatString(recipes[i].description), userInput)
+    ) {
+      filteredRecipes.push(recipes[i]);
+      continue;
+    }
+
+    for (let j = 0; j < recipes[i].ingredients.length; j++) {
+      if (isStrIncluded(formatString(recipes[i].ingredients[j].ingredient), userInput)) {
+        filteredRecipes.push(recipes[i]);
+        break;
+      }
+    }
+  }
+
+  return filteredRecipes;
+};
 
 export const filterRecipes = (userInput, recipes) => {
-  return recipes.filter((recipe) => {
+  const filteredRecipes = [];
+
+  for (let i = 0; i < recipes.length; i++) {
+    if (
+      formatString(recipes[i].name).indexOf(userInput) !== -1 ||
+      formatString(recipes[i].description).indexOf(userInput) !== -1
+    ) {
+      filteredRecipes.push(recipes[i]);
+      continue;
+    }
+
+    for (let j = 0; j < recipes[i].ingredients.length; j++) {
+      if (formatString(recipes[i].ingredients[j].ingredient).indexOf(userInput) !== -1) {
+        filteredRecipes.push(recipes[i]);
+        break;
+      }
+    }
+  }
+
+  return filteredRecipes;
+};
+
+export const filterRecipesFunctionnal = (userInput, recipes) => {
+  return recipes.filter(({ name, description, ingredients }) => {
     return (
-      recipe.name.toLowerCase().indexOf(userInput) !== -1 ||
-      recipe.description.toLowerCase().indexOf(userInput) !== -1 ||
-      recipe.ingredients.some((ingredient) => {
-        return ingredient.ingredient.toLowerCase().indexOf(userInput) !== -1;
+      formatString(name).indexOf(userInput) !== -1 ||
+      formatString(description).indexOf(userInput) !== -1 ||
+      ingredients.some(({ ingredient }) => {
+        return formatString(ingredient).indexOf(userInput) !== -1;
       })
     );
   });
 };
+
+/*****************************************/
+/*************** OPTIONS *****************/
+/*****************************************/
 
 export const filterAndSortOptions = (userInput, options) => {
   return [...options].filter((option) => {
