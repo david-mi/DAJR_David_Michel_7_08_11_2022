@@ -7,13 +7,12 @@ import {
   createAndDisplayOptionsLists,
   handleOptionDisplayInput
 } from "./view.js";
+import { formatString } from "./utils.js";
 
-let isPasting = false;
 let previousInput = "";
 
 const mainSearchInput = document.querySelector("input");
 mainSearchInput.addEventListener("input", handleMainSearchInput);
-mainSearchInput.addEventListener("paste", handlePasteOnMainSearchInput);
 
 const mainForm = document.querySelector("form");
 mainForm.addEventListener("submit", handleMainFormSubmit);
@@ -49,32 +48,26 @@ optionsInputs.forEach(optionInput => {
  */
 
 function handleMainSearchInput() {
-  const userInput = mainSearchInput.value.toLowerCase().trim();
+  const userInput = formatString(mainSearchInput.value);
 
-  if (userInput.length < 3 && recipesData.filtered.length === recipesData.full.length) {
-    return;
-  }
-
-  if (!isPasting && previousInput.length > 0 && userInput.length > previousInput.length) {
+  if (userInput.length < 3) {
+    if (recipesData.filtered.length === recipesData.recipes.length) {
+      return;
+    } else {
+      recipesData.filtered = filterRecipes("", recipesData.recipes);
+    }
+  } else if (userInput.startsWith(previousInput)) {
     recipesData.filtered = filterRecipes(userInput, recipesData.filtered);
   } else {
-    recipesData.filtered = filterRecipes(userInput, recipesData.full);
+    recipesData.filtered = filterRecipes(userInput, recipesData.recipes);
   }
 
+  console.log(recipesData.filtered);
   createAndDisplayRecipes(recipesData.filtered);
   createAndDisplayOptionsLists(recipesData.filtered);
-  isPasting = false;
   previousInput = userInput;
 }
 
-/** 
- * Set {@link isPasting} variable to true, to tell if user is actually pasting something into search input 
- * instead of writing 
- */
-
-function handlePasteOnMainSearchInput() {
-  isPasting = true;
-}
 
 function handleMainFormSubmit(event) {
   event.preventDefault();
