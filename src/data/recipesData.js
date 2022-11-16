@@ -6,8 +6,8 @@ import { recipes } from "./recipes";
  */
 
 export const recipesData = {
-  filtered: [],
-  full: recipes,
+  filtered: recipes,
+  recipes: recipes,
   ingredients: null,
   appliances: null,
   ustensils: null
