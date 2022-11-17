@@ -165,17 +165,16 @@ export const removeTrapFocusOnOption = () => {
 
 
 /**
- * - Convert a Set of strings into array
  * - Sort array in alphabetical order
- * - Iterate through created array, create Element and insert it
+ * - Iterate through array, create Element and insert them
  *  into {@link containerElement}
  * 
- * @param {Set<String>} optionSet 
+ * @param {string[]} optionArray 
  * @param {HTMLUListElement} containerElement 
  */
 
-export const createAndDisplaySortedOptionLists = (optionSet, listContainer) => {
-  [...optionSet]
+export const createAndDisplaySortedOptionLists = (optionArray, listContainer) => {
+  optionArray
     .sort((a, b) => a.localeCompare(b))
     .forEach(element => {
       const optionElement = createOptionListElement(element);
@@ -195,21 +194,25 @@ export const createAndDisplayOptionsLists = (recipes) => {
   appliancesListContainer.innerHTML = "";
   ustensilsListContainer.innerHTML = "";
 
-  recipesData.ingredients = new Set();
-  recipesData.appliances = new Set();
-  recipesData.ustensils = new Set();
+  recipesData.ingredients = [];
+  recipesData.appliances = [];
+  recipesData.ustensils = [];
 
   recipes.forEach(({ ingredients, appliance, ustensils }) => {
-    recipesData.appliances.add(appliance);
+    recipesData.appliances.push(appliance);
 
     ingredients.forEach(({ ingredient }) => {
-      recipesData.ingredients.add(ingredient);
+      recipesData.ingredients.push(ingredient);
     });
 
     ustensils.forEach(ustensil => {
-      recipesData.ustensils.add(ustensil);
+      recipesData.ustensils.push(ustensil);
     });
   });
+
+  recipesData.appliances = [...new Set(recipesData.appliances)];
+  recipesData.ingredients = [...new Set(recipesData.ingredients)];
+  recipesData.ustensils = [...new Set(recipesData.ustensils)];
 
   createAndDisplaySortedOptionLists(recipesData.ingredients, ingredientsListContainer);
   createAndDisplaySortedOptionLists(recipesData.appliances, appliancesListContainer);

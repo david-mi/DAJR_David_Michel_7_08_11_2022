@@ -31,8 +31,8 @@
  * @type {{
  *  filtered: Recipe[],
  *  recipes: Recipe[],
- *  ingredients: null | Set<String>,
- *  appliances: null | Set<String>
- *  ustensils: null | Set<String>
+ *  ingredients: string[],
+ *  appliances: string[]
+ *  ustensils: string[]
  * }}
  */
