@@ -41,6 +41,11 @@ main {
 }
 
 button,
+input {
+  border: none;
+}
+
+button,
 a {
   cursor: pointer;
 }
