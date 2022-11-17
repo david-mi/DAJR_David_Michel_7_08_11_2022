@@ -6,8 +6,9 @@
     width: fit-content;
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
     height: fit-content;
+    border-radius: 5px;
+    max-width: 170px;
 
     @include medium {
       width: 100%;
@@ -15,18 +16,30 @@
 
     &[data-display] {
       z-index: 99;
+      flex: 1 1 667px;
+      max-width: 667px;
+      border-radius: 5px 5px 0 0;
     }
 
     &[data-option="ingredients"] {
       background-color: var(--clr-ingredients);
+      .list {
+        background-color: var(--clr-ingredients);
+      }
     }
 
     &[data-option="ustensils"] {
       background-color: var(--clr-utensil);
+      .list {
+        background-color: var(--clr-utensil);
+      }
     }
 
     &[data-option="appliances"] {
       background-color: var(--clr-appliance);
+      .list {
+        background-color: var(--clr-appliance);
+      }
     }
   }
 }
