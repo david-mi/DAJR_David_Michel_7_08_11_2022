@@ -6,7 +6,8 @@ import {
   createAndDisplayRecipes,
   createAndDisplayOptionsLists,
   removeTrapFocusOnOption,
-  addTrapFocusOnOption
+  addTrapFocusOnOption,
+  createTagButton
 } from "./view.js";
 import { formatString } from "./utils.js";
 
@@ -78,6 +79,18 @@ function handleMainFormSubmit(event) {
   event.preventDefault();
   handleMainSearchInput();
 }
+
+
+/*****************************************/
+/***************** TAGS ******************/
+/*****************************************/
+
+
+export const handleOptionListClick = (event) => {
+  const tagButton = createTagButton(event);
+  const tagsContainer = document.querySelector(".tags");
+  tagsContainer.insertAdjacentElement("beforeend", tagButton);
+};
 
 
 /*****************************************/

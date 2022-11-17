@@ -1,6 +1,7 @@
 import "./data/types.js";
 import { recipesData } from "./data/recipesData.js";
 import { recipesContainer, ingredientsListContainer, appliancesListContainer, ustensilsListContainer } from "./constants";
+import { handleOptionListClick } from "./handlers.js";
 
 const openOptionEvent = new Event("openoption");
 const closeOptionEvent = new Event("closeoption");
@@ -113,6 +114,35 @@ export const toggleAdvancedSearchAttributes = ({ currentTarget }) => {
   }
 };
 
+
+/*****************************************/
+/***************** TAGS ******************/
+/*****************************************/
+
+
+/**
+ * Create tag button element
+ * 
+ * @param {MouseEvent} target clicked li option
+ */
+
+export const createTagButton = ({ target }) => {
+  const targetOption = target.parentElement.dataset.option;
+  const tagName = target.innerText;
+
+  const buttonElement = document.createElement("button");
+  buttonElement.classList.add("tag");
+  buttonElement.dataset.option = targetOption;
+
+  const buttonHtmlContent = `
+    <span>${tagName}</span>
+    <img src="./assets/icons/close.svg" alt="icône qui représente une croix">
+  `;
+  buttonElement.insertAdjacentHTML("beforeend", buttonHtmlContent);
+
+  return buttonElement;
+};
+
 /*****************************************/
 /************* OPTIONS LISTS *************/
 /*****************************************/
@@ -128,9 +158,7 @@ export const createOptionListElement = (option) => {
   liElement.innerText = option;
   liElement.tabIndex = "0";
 
-  liElement.addEventListener("click", () => {
-    console.log("handle tag selection");
-  });
+  liElement.addEventListener("click", handleOptionListClick);
 
   return liElement;
 };
