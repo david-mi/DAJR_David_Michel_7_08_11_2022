@@ -1,4 +1,15 @@
 .option {
+  &[data-display] {
+    .dropdown-btn {
+      width: auto;
+      position: static;
+
+      img {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
   .dropdown-btn {
     display: grid;
     align-items: center;
@@ -12,15 +23,6 @@
 
     img {
       transition: 300ms;
-    }
-
-    &.expand {
-      width: auto;
-      position: static;
-
-      img {
-        transform: rotate(180deg);
-      }
     }
   }
 }

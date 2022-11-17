@@ -5,7 +5,8 @@ import {
   createOptionListElement,
   createAndDisplayRecipes,
   createAndDisplayOptionsLists,
-  handleOptionDisplayInput
+  removeTrapFocusOnOption,
+  addTrapFocusOnOption
 } from "./view.js";
 import { formatString } from "./utils.js";
 
@@ -22,7 +23,7 @@ backgroundHideOptions.addEventListener("click", triggerClickOnActiveDropdownButt
 
 const optionsDropdownButtons = document.querySelectorAll(".dropdown-btn");
 optionsDropdownButtons.forEach(button => {
-  button.addEventListener("click", handleOptionDrowDownButtonClick);
+  button.addEventListener("click", toggleAdvancedSearchAttributes);
 });
 
 const optionsForms = document.querySelectorAll(".option form");
@@ -37,6 +38,11 @@ optionsInputs.forEach(optionInput => {
   optionInput.addEventListener("input", handleSearchOptionInput);
 });
 
+const optionsElements = document.querySelectorAll(".option");
+optionsElements.forEach(optionElement => {
+  optionElement.addEventListener("closeoption", handleCloseOption);
+  optionElement.addEventListener("openoption", handleOpenOption);
+});
 
 /*****************************************/
 /********** MAIN SEARCH INPUT ************/
@@ -75,18 +81,48 @@ function handleMainFormSubmit(event) {
 
 
 /*****************************************/
-/******* OPTIONS DROPDOWN BUTTON *********/
+/*************** OPTIONS  ****************/
 /*****************************************/
 
 
 /**
- * @param {MouseEvent} currentTarget 
+ * - Remove focus trap on closed option
+ * - Clear option input
+ * - Trigger input event to reset option list
+ * 
+ * @param {HTMLElement} target option who got closed
  */
 
-function handleOptionDrowDownButtonClick({ currentTarget }) {
-  toggleAdvancedSearchAttributes(currentTarget);
-  handleOptionDisplayInput(currentTarget);
+function handleCloseOption({ target }) {
+  removeTrapFocusOnOption();
+
+  const optionInputElement = target.querySelector("input");
+  optionInputElement.value = "";
+
+  const inputEvent = new Event("input");
+  optionInputElement.dispatchEvent(inputEvent);
 }
+
+
+/**
+ * - Add focus trap on opened option
+ * - Put focus on option input
+ * 
+ * @param {HTMLElement} target option who got opened
+ */
+
+function handleOpenOption({ target }) {
+  const optionChoice = target.dataset.option;
+  addTrapFocusOnOption(optionChoice);
+
+  const optionInputElement = target.querySelector("input");
+  optionInputElement.focus();
+}
+
+
+/*****************************************/
+/******* OPTIONS DROPDOWN BUTTON *********/
+/*****************************************/
 
 /**
  *  Gets called when clicking on the transparent background behind opened options
@@ -96,11 +132,11 @@ function handleOptionDrowDownButtonClick({ currentTarget }) {
  * - Dispatch a click event on it
  */
 
+
 function triggerClickOnActiveDropdownButton() {
-  const currentDisplayedOption = document.querySelector("[data-display]");
-  const currentDisplayedOptionButton = currentDisplayedOption.querySelector(".dropdown-btn");
+  const currentActiveDropdownButton = document.querySelector("[data-display] .dropdown-btn");
   const clickEvent = new Event("click");
-  currentDisplayedOptionButton.dispatchEvent(clickEvent);
+  currentActiveDropdownButton.dispatchEvent(clickEvent);
 }
 
 

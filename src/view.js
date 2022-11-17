@@ -2,6 +2,9 @@ import "./data/types.js";
 import { recipesData } from "./data/recipesData.js";
 import { recipesContainer, ingredientsListContainer, appliancesListContainer, ustensilsListContainer } from "./constants";
 
+const openOptionEvent = new Event("openoption");
+const closeOptionEvent = new Event("closeoption");
+
 /*****************************************/
 /**************** RECIPES ****************/
 /*****************************************/
@@ -85,27 +88,30 @@ export const createAndDisplayRecipes = (recipes) => {
  * @param {MouseEvent} currentTarget clicked drop down button
  */
 
-export const toggleAdvancedSearchAttributes = (currentTarget) => {
+export const toggleAdvancedSearchAttributes = ({ currentTarget }) => {
   const currentOpenedOptionButton = document.querySelector(".option[data-display] .dropdown-btn");
   if (currentOpenedOptionButton !== null && currentOpenedOptionButton !== currentTarget) {
-    toggleAdvancedSearchAttributes(currentOpenedOptionButton);
+    toggleAdvancedSearchAttributes({ currentTarget: currentOpenedOptionButton });
   }
 
   const chosenOption = currentTarget.dataset.option;
-  currentTarget.toggleAttribute("data-display");
-
   const targetOptionElement = document.querySelector(`.option[data-option="${chosenOption}"] `);
   targetOptionElement.toggleAttribute("data-display");
 
-  const elementsWhereToToggleDisplay = document.querySelectorAll(`.bg-fixed, [data-option="${chosenOption}"] :is(ul, h2, input)`);
+  const elementsWhereToToggleDisplay = document.querySelectorAll(
+    `.bg-fixed,
+     [data-option="${chosenOption}"] :is(ul, h2, input)`
+  );
   elementsWhereToToggleDisplay.forEach(element => {
     element.classList.toggle("display-none");
   });
 
-  const optionButtonElement = document.querySelector(`[data-option="${chosenOption}"] .dropdown-btn`);
-  optionButtonElement.classList.toggle("expand");
+  if (targetOptionElement.dataset.display === undefined) {
+    targetOptionElement.dispatchEvent(closeOptionEvent);
+  } else {
+    targetOptionElement.dispatchEvent(openOptionEvent);
+  }
 };
-
 
 /*****************************************/
 /************* OPTIONS LISTS *************/
@@ -120,12 +126,41 @@ export const toggleAdvancedSearchAttributes = (currentTarget) => {
 export const createOptionListElement = (option) => {
   const liElement = document.createElement("li");
   liElement.innerText = option;
+  liElement.tabIndex = "0";
 
   liElement.addEventListener("click", () => {
     console.log("handle tag selection");
   });
 
   return liElement;
+};
+
+
+/**
+ * Prevent tabbing outside opened options, except for going in browser options
+ * @param {"ingredients" | "appliances" | "ustensils"} chosenOption 
+ */
+
+export const addTrapFocusOnOption = (chosenOption) => {
+  const focusableElementsOustideOption = document.querySelectorAll(
+    `input:not([data-option="${chosenOption}"] input),
+     button:not([data-option="${chosenOption}"] button),
+     a`
+  );
+  focusableElementsOustideOption.forEach(element => {
+    element.tabIndex = "-1";
+  });
+};
+
+/**
+ * Remove tabIndex attribute on every elements who had it set to -1
+ */
+
+export const removeTrapFocusOnOption = () => {
+  const elementsWithTabIndex = document.querySelectorAll("[tabIndex='-1']");
+  elementsWithTabIndex.forEach(element => {
+    element.removeAttribute("tabIndex");
+  });
 };
 
 
@@ -180,31 +215,5 @@ export const createAndDisplayOptionsLists = (recipes) => {
   createAndDisplaySortedOptionLists(recipesData.appliances, appliancesListContainer);
   createAndDisplaySortedOptionLists(recipesData.ustensils, ustensilsListContainer);
 };
-
-
-/*****************************************/
-/************* OPTIONS INPUTS ************/
-/*****************************************/
-
-
-/**
- * - If input is displayed, put focus on it
- * - If not, reset it's value
- * 
- * @param {HTMLButtonElement} currentTarget
- */
-
-export function handleOptionDisplayInput(currentTarget) {
-  const chosenOption = currentTarget.dataset.option;
-
-  const optionInputElement = document.querySelector(`[data-option="${chosenOption}"] input`);
-  if (optionInputElement.classList.contains("display-none")) {
-    optionInputElement.value = "";
-    const inputEvent = new Event("input");
-    optionInputElement.dispatchEvent(inputEvent);
-  } else {
-    optionInputElement.focus();
-  }
-}
 
 
