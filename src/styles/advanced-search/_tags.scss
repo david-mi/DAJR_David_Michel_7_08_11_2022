@@ -1,0 +1,45 @@
+@use "../mixins" as *;
+
+.tags {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .tag {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding-inline: 20px;
+    border-radius: 5px;
+    height: 37px;
+
+    &:last-child {
+      margin-bottom: 20px;
+    }
+
+    @include medium {
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 700;
+      font-family: "Lato", sans-serif;
+      white-space: nowrap;
+    }
+
+    &[data-option="ingredients"] {
+      background-color: var(--clr-ingredients);
+    }
+
+    &[data-option="ustensils"] {
+      background-color: var(--clr-utensil);
+    }
+
+    &[data-option="appliances"] {
+      background-color: var(--clr-appliance);
+    }
+  }
+}
