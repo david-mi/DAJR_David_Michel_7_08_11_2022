@@ -79,12 +79,18 @@ export const createAndDisplayRecipes = (recipes) => {
 
 /**
  * Open or close targeted options input and list,
- * If opening, put focus to associated form input
+ * - If a menu was already open, close it
+ * - If opening, put focus to associated form input
  * 
  * @param {MouseEvent} currentTarget clicked drop down button
  */
 
 export const toggleAdvancedSearchAttributes = (currentTarget) => {
+  const currentOpenedOptionButton = document.querySelector(".option[data-display] .dropdown-btn");
+  if (currentOpenedOptionButton !== null && currentOpenedOptionButton !== currentTarget) {
+    toggleAdvancedSearchAttributes(currentOpenedOptionButton);
+  }
+
   const chosenOption = currentTarget.dataset.option;
   currentTarget.toggleAttribute("data-display");
 
