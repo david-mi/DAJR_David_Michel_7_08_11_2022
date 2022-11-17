@@ -14,6 +14,7 @@
     padding-block: var(--input-padding);
     padding-inline: var(--input-padding) 65px;
     font-size: 18px;
+    border-radius: 5px;
 
     &::placeholder {
       opacity: 0.25;
