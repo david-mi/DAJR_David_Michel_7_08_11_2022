@@ -109,6 +109,36 @@ export const filterRecipesFunctionnal = (userInput, recipes) => {
 
 
 /*****************************************/
+/***************** TAGS ******************/
+/*****************************************/
+
+
+/**
+ * @param {string} userInput text input from search input in lowercase
+ * @param {string} recipes recipes to filter
+ * @return {Recipe[]} filtered recipe based on recipe's ingredients, name and description
+ */
+
+export const filterRecipesByTag = (tagName, tagOption, recipes) => {
+  const filterByTagsCallbacks = {
+    ingredients: ({ ingredients }) => {
+      return ingredients.some(({ ingredient }) => {
+        return ingredient === tagName;
+      });
+    },
+    appliances: ({ appliance }) => {
+      return appliance === tagName;
+    },
+    ustensils: ({ ustensils }) => {
+      return ustensils.some((ustensil) => {
+        return ustensil === tagName;
+      });
+    }
+  };
+
+  return recipes.filter(filterByTagsCallbacks[tagOption]);
+};
+/*****************************************/
 /*************** OPTIONS *****************/
 /*****************************************/
 

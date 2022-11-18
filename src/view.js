@@ -123,16 +123,15 @@ export const toggleAdvancedSearchAttributes = ({ currentTarget }) => {
 /**
  * Create tag button element
  * 
- * @param {MouseEvent} target clicked li option
+ * @param {string} tagName name of tha tag
+ * @param {"ingredients" | "appliances" | "ustensils"} targetOption option targeted
  */
 
-export const createTagButton = ({ target }) => {
-  const targetOption = target.parentElement.dataset.option;
-  const tagName = target.innerText;
-
+export const createTagButton = (tagName, targetOption) => {
   const buttonElement = document.createElement("button");
   buttonElement.classList.add("tag");
   buttonElement.dataset.option = targetOption;
+  buttonElement.addEventListener("click", handleTagClick);
 
   const buttonHtmlContent = `
     <span>${tagName}</span>
@@ -217,7 +216,7 @@ export const createAndDisplaySortedOptionLists = (optionArray, listContainer) =>
  * @param {Recipe} recipes 
  */
 
-export const createAndDisplayOptionsLists = (recipes) => {
+export const createAndDisplayOptionsLists = (recipes, hasTags) => {
   ingredientsListContainer.innerHTML = "";
   appliancesListContainer.innerHTML = "";
   ustensilsListContainer.innerHTML = "";
@@ -227,14 +226,20 @@ export const createAndDisplayOptionsLists = (recipes) => {
   recipesData.ustensils = [];
 
   recipes.forEach(({ ingredients, appliance, ustensils }) => {
-    recipesData.appliances.push(appliance);
+    if (recipesData.tags.appliances.indexOf(appliance) === -1) {
+      recipesData.appliances.push(appliance);
+    }
 
     ingredients.forEach(({ ingredient }) => {
-      recipesData.ingredients.push(ingredient);
+      if (recipesData.tags.ingredients.indexOf(ingredient) === -1) {
+        recipesData.ingredients.push(ingredient);
+      }
     });
 
     ustensils.forEach(ustensil => {
-      recipesData.ustensils.push(ustensil);
+      if (recipesData.tags.ustensils.indexOf(ustensil) === -1) {
+        recipesData.ustensils.push(ustensil);
+      }
     });
   });
 

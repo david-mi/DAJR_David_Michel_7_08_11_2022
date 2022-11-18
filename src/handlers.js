@@ -1,4 +1,4 @@
-import { filterAndSortOptions, filterRecipes } from "./filter";
+import { filterAndSortOptions, filterRecipes, filterRecipesByTag } from "./filter";
 import { recipesData } from "./data/recipesData";
 import {
   toggleAdvancedSearchAttributes,
@@ -12,6 +12,7 @@ import {
 import { formatString } from "./utils.js";
 
 let previousInput = "";
+const tagsContainer = document.querySelector(".tags");
 
 const mainSearchInput = document.querySelector("input");
 mainSearchInput.addEventListener("input", handleMainSearchInput);
@@ -69,6 +70,13 @@ function handleMainSearchInput() {
     recipesData.filtered = filterRecipes(userInput, recipesData.recipes);
   }
 
+
+  for (const tagOption in recipesData.tags) {
+    if (recipesData.tags[tagOption].length > 0) {
+      recipesData.filtered = filterRecipesByTags(tagOption, recipesData.filtered);
+    }
+  }
+
   createAndDisplayRecipes(recipesData.filtered);
   createAndDisplayOptionsLists(recipesData.filtered);
   previousInput = userInput;
@@ -86,10 +94,20 @@ function handleMainFormSubmit(event) {
 /*****************************************/
 
 
-export const handleOptionListClick = (event) => {
-  const tagButton = createTagButton(event);
-  const tagsContainer = document.querySelector(".tags");
+export const handleOptionListClick = ({ target }) => {
+  const targetOption = target.parentElement.dataset.option;
+  const tagName = target.innerText;
+
+  const tagButton = createTagButton(tagName, targetOption);
   tagsContainer.insertAdjacentElement("beforeend", tagButton);
+
+  recipesData.tags[targetOption].push(tagName);
+
+  recipesData.filtered = filterRecipesByTag(tagName, targetOption, recipesData.filtered);
+
+  createAndDisplayRecipes(recipesData.filtered);
+  createAndDisplayOptionsLists(recipesData.filtered);
+};
 };
 
 
