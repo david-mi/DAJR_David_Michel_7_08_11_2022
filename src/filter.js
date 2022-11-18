@@ -1,3 +1,4 @@
+import { recipesData } from "./data/recipesData.js";
 import "./data/types.js";
 import { formatString } from "./utils.js";
 
@@ -138,6 +139,35 @@ export const filterRecipesByTag = (tagName, tagOption, recipes) => {
 
   return recipes.filter(filterByTagsCallbacks[tagOption]);
 };
+
+
+export const filterRecipesByTags = (tagOption, recipes) => {
+  const filterByTagsCallbacks = {
+    ingredients: ({ ingredients }) => {
+      return ingredients.some(({ ingredient }) => {
+        return recipesData.tags.ingredients.some(ingredientTag => {
+          return ingredientTag === ingredient;
+        });
+      });
+    },
+    appliances: ({ appliance }) => {
+      return recipesData.tags.appliances.some(applianceTag => {
+        return applianceTag === appliance;
+      });
+    },
+    ustensils: ({ ustensils }) => {
+      return ustensils.some((ustensil) => {
+        return recipesData.tags.ustensils.some(ustensilTag => {
+          return ustensilTag === ustensil;
+        });
+      });
+    }
+  };
+
+  return recipes.filter(filterByTagsCallbacks[tagOption]);
+};
+
+
 /*****************************************/
 /*************** OPTIONS *****************/
 /*****************************************/

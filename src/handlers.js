@@ -1,4 +1,4 @@
-import { filterAndSortOptions, filterRecipes, filterRecipesByTag } from "./filter";
+import { filterAndSortOptions, filterRecipes, filterRecipesByTag, filterRecipesByTags } from "./filter";
 import { recipesData } from "./data/recipesData";
 import {
   toggleAdvancedSearchAttributes,
@@ -108,6 +108,28 @@ export const handleOptionListClick = ({ target }) => {
   createAndDisplayRecipes(recipesData.filtered);
   createAndDisplayOptionsLists(recipesData.filtered);
 };
+
+export const handleTagClick = ({ currentTarget }) => {
+  const userInput = formatString(mainSearchInput.value).trim();
+
+  const targetOption = currentTarget.dataset.option;
+  const tagName = currentTarget.innerText;
+  currentTarget.remove();
+
+  recipesData.tags[targetOption] = recipesData.tags[targetOption].filter(tag => {
+    return tag !== tagName;
+  });
+
+  recipesData.filtered = filterRecipes(userInput, recipesData.recipes);
+
+  for (const tagOption in recipesData.tags) {
+    if (recipesData.tags[tagOption].length > 0) {
+      recipesData.filtered = filterRecipesByTags(tagOption, recipesData.filtered);
+    }
+  }
+
+  createAndDisplayRecipes(recipesData.filtered);
+  createAndDisplayOptionsLists(recipesData.filtered);
 };
 
 

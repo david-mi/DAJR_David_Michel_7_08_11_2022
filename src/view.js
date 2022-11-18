@@ -1,7 +1,7 @@
 import "./data/types.js";
 import { recipesData } from "./data/recipesData.js";
 import { recipesContainer, ingredientsListContainer, appliancesListContainer, ustensilsListContainer } from "./constants";
-import { handleOptionListClick } from "./handlers.js";
+import { handleOptionListClick, handleTagClick } from "./handlers.js";
 
 const openOptionEvent = new Event("openoption");
 const closeOptionEvent = new Event("closeoption");
