@@ -9,6 +9,11 @@
     height: fit-content;
     border-radius: 5px;
     max-width: 170px;
+    z-index: 20;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
 
     @include medium {
       width: 100%;
@@ -18,6 +23,7 @@
       flex: 1 1 667px;
       max-width: 667px;
       border-radius: 5px 5px 0 0;
+      z-index: 999;
     }
 
     &[data-option="ingredients"] {
