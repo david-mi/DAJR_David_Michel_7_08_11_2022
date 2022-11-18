@@ -196,17 +196,24 @@ export const removeTrapFocusOnOption = () => {
  * - Iterate through array, create Element and insert them
  *  into {@link containerElement}
  * 
- * @param {string[]} optionArray 
- * @param {HTMLUListElement} containerElement 
+ * @param {string} option
+ * @param {HTMLUListElement} optionListContainer 
  */
 
-export const createAndDisplaySortedOptionLists = (optionArray, listContainer) => {
-  optionArray
-    .sort((a, b) => a.localeCompare(b))
-    .forEach(element => {
-      const optionElement = createOptionListElement(element);
-      listContainer.insertAdjacentElement("beforeend", optionElement);
-    });
+export const createAndDisplaySortedOptionLists = (option, optionListContainer) => {
+  const optionArray = recipesData[option];
+  if (optionArray.length === 0) {
+    const emptyMessageWarning = optionListContainer.dataset.empty;
+    const emptyListHtml = `<p>${emptyMessageWarning}</p>`;
+    optionListContainer.insertAdjacentHTML("beforeend", emptyListHtml);
+  } else {
+    optionArray
+      .sort((a, b) => a.localeCompare(b))
+      .forEach(element => {
+        const optionElement = createOptionListElement(element);
+        optionListContainer.insertAdjacentElement("beforeend", optionElement);
+      });
+  }
 };
 
 
@@ -216,7 +223,7 @@ export const createAndDisplaySortedOptionLists = (optionArray, listContainer) =>
  * @param {Recipe} recipes 
  */
 
-export const createAndDisplayOptionsLists = (recipes, hasTags) => {
+export const createAndDisplayOptionsLists = (recipes) => {
   ingredientsListContainer.innerHTML = "";
   appliancesListContainer.innerHTML = "";
   ustensilsListContainer.innerHTML = "";
@@ -247,9 +254,9 @@ export const createAndDisplayOptionsLists = (recipes, hasTags) => {
   recipesData.ingredients = [...new Set(recipesData.ingredients)];
   recipesData.ustensils = [...new Set(recipesData.ustensils)];
 
-  createAndDisplaySortedOptionLists(recipesData.ingredients, ingredientsListContainer);
-  createAndDisplaySortedOptionLists(recipesData.appliances, appliancesListContainer);
-  createAndDisplaySortedOptionLists(recipesData.ustensils, ustensilsListContainer);
+  createAndDisplaySortedOptionLists("ingredients", ingredientsListContainer);
+  createAndDisplaySortedOptionLists("appliances", appliancesListContainer);
+  createAndDisplaySortedOptionLists("ustensils", ustensilsListContainer);
 };
 
 
