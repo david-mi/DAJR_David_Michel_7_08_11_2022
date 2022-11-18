@@ -98,6 +98,10 @@ export const handleOptionListClick = ({ target }) => {
   const targetOption = target.parentElement.dataset.option;
   const tagName = target.innerText;
 
+  const optionInput = document.querySelector(`input[data-option="${targetOption}"]`);
+  optionInput.value = "";
+  optionInput.focus();
+
   const tagButton = createTagButton(tagName, targetOption);
   tagsContainer.insertAdjacentElement("beforeend", tagButton);
 
@@ -115,6 +119,9 @@ export const handleTagClick = ({ currentTarget }) => {
   const targetOption = currentTarget.dataset.option;
   const tagName = currentTarget.innerText;
   currentTarget.remove();
+
+  const optionInput = document.querySelector(`input[data-option="${targetOption}"]`);
+  optionInput.focus();
 
   recipesData.tags[targetOption] = recipesData.tags[targetOption].filter(tag => {
     return tag !== tagName;
