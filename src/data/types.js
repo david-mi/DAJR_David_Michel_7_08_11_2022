@@ -34,5 +34,10 @@
  *  ingredients: string[],
  *  appliances: string[]
  *  ustensils: string[]
+ *  tags: {
+ *    ingredients: string[],
+ *    appliances: string[]
+ *    ustensils: string[]
+ *  }
  * }}
  */
