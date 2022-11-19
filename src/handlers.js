@@ -63,14 +63,13 @@ function handleMainSearchInput() {
     if (recipesData.filtered.length === recipesData.recipes.length) {
       return;
     } else {
-      recipesData.filtered = filterRecipes("", recipesData.recipes);
+      recipesData.filtered = recipesData.recipes;
     }
   } else if (userInput.startsWith(previousInput)) {
     recipesData.filtered = filterRecipes(userInput, recipesData.filtered);
   } else {
     recipesData.filtered = filterRecipes(userInput, recipesData.recipes);
   }
-
 
   for (const tagOption in recipesData.tags) {
     if (recipesData.tags[tagOption].length > 0) {
