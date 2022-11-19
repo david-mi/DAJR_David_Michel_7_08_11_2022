@@ -15,12 +15,6 @@
   --width-max: 1240px;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   display: flex;
   flex-direction: column;
@@ -38,23 +32,4 @@ main {
   gap: 20px;
   max-width: var(--width-max);
   width: 100%;
-}
-
-button,
-input {
-  border: none;
-}
-
-button,
-a {
-  cursor: pointer;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-ul {
-  list-style-type: none;
 }

@@ -1,16 +1,18 @@
-@use "./classes";
-@use "./base";
+@use "./abstracts/classes";
 
-@use "./header";
+@use "./base/base";
+@use "./base/reset";
 
-@use "./search/form/form";
+@use "./components/header";
 
-@use "./recipes/recipes";
-@use "./recipes/card";
+@use "./components/search/form/form";
 
-@use "./advanced-search/advanced-search";
-@use "./advanced-search/tags";
-@use "./advanced-search/option/list";
-@use "./advanced-search/option/option";
-@use "./advanced-search/option/form/form-option";
-@use "./advanced-search/option/form/dropdown-button";
+@use "./components/recipes/recipes";
+@use "./components/recipes/card";
+
+@use "./components/advanced-search/advanced-search";
+@use "./components/advanced-search/tags";
+@use "./components/advanced-search/option/list";
+@use "./components/advanced-search/option/option";
+@use "./components/advanced-search/option/form/form-option";
+@use "./components/advanced-search/option/form/dropdown-button";

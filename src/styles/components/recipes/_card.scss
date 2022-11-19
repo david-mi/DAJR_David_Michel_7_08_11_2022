@@ -1,4 +1,4 @@
-@use "../mixins" as *;
+@use "../../abstracts/mixins" as *;
 
 .recipe-link {
   &:hover .recipe-card {
