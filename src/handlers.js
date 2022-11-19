@@ -95,6 +95,18 @@ function handleMainFormSubmit(event) {
 /*****************************************/
 
 
+/**
+ * Gets called when user is clicking on an option from a displayed list
+ * 
+ * - Clear input related to option and put focus on it
+ * - Create tag element and display it in {@link tagsContainer}
+ * - Add the new tag name in corresponding tag array in {@link recipesData}
+ * - Filter recipes based on previously filtered recipes 
+ * - Create and display recipes
+ * 
+ * @param {MouseEvent} currentTarget 
+ */
+
 export const handleOptionListClick = ({ target }) => {
   const targetOption = target.parentElement.dataset.option;
   const tagName = target.innerText;
@@ -113,6 +125,19 @@ export const handleOptionListClick = ({ target }) => {
   createAndDisplayRecipes(recipesData.filtered);
   createAndDisplayOptionsLists(recipesData.filtered);
 };
+
+
+/**
+ * Gets called when user is clicking on a displayed tag
+ * 
+ * - Filter recipes based on selected tags 
+ * - Remove clicked tag from the DOM
+ * - Remove tag name from corresponding tag array in {@link recipesData}
+ * - Filter recipes
+ * - Create and display recipes
+ * 
+ * @param {MouseEvent} currentTarget  
+ */
 
 export const handleTagClick = ({ currentTarget }) => {
   const userInput = formatString(mainSearchInput.value).trim();
