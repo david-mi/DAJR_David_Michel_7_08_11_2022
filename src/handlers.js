@@ -120,9 +120,6 @@ export const handleTagClick = ({ currentTarget }) => {
   const tagName = currentTarget.innerText;
   currentTarget.remove();
 
-  const optionInput = document.querySelector(`input[data-option="${targetOption}"]`);
-  optionInput.focus();
-
   recipesData.tags[targetOption] = recipesData.tags[targetOption].filter(tag => {
     return tag !== tagName;
   });
