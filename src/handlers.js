@@ -7,7 +7,8 @@ import {
   createAndDisplayOptionsLists,
   removeTrapFocusOnOption,
   addTrapFocusOnOption,
-  createTagButton
+  createTagButton,
+  createAndDisplayEmptyDataWarning
 } from "./view.js";
 import { formatString } from "./utils.js";
 
@@ -218,8 +219,6 @@ export function handleSearchOptionInput({ target }) {
       optionListContainer.insertAdjacentElement("beforeend", optionElement);
     });
   } else {
-    const emptyMessageWarning = optionListContainer.dataset.empty;
-    const emptyListHtml = `<p>${emptyMessageWarning}</p>`;
-    optionListContainer.insertAdjacentHTML("beforeend", emptyListHtml);
+    createAndDisplayEmptyDataWarning(optionListContainer);
   }
 }

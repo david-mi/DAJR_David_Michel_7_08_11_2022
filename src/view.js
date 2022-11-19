@@ -6,9 +6,11 @@ import { handleOptionListClick, handleTagClick } from "./handlers.js";
 const openOptionEvent = new Event("openoption");
 const closeOptionEvent = new Event("closeoption");
 
+
 /*****************************************/
 /**************** RECIPES ****************/
 /*****************************************/
+
 
 /**
  * @param {Recipe} recipe 
@@ -69,9 +71,7 @@ export const createAndDisplayRecipes = (recipes) => {
       recipesContainer.insertAdjacentHTML("beforeend", recipeCard);
     });
   } else {
-    const emptyMessageWarning = recipesContainer.dataset.empty;
-    const emptyListHtml = `<p>${emptyMessageWarning}</p>`;
-    recipesContainer.insertAdjacentHTML("beforeend", emptyListHtml);
+    createAndDisplayEmptyDataWarning(recipesContainer);
   }
 };
 
@@ -203,9 +203,7 @@ export const removeTrapFocusOnOption = () => {
 export const createAndDisplaySortedOptionLists = (option, optionListContainer) => {
   const optionArray = recipesData[option];
   if (optionArray.length === 0) {
-    const emptyMessageWarning = optionListContainer.dataset.empty;
-    const emptyListHtml = `<p>${emptyMessageWarning}</p>`;
-    optionListContainer.insertAdjacentHTML("beforeend", emptyListHtml);
+    createAndDisplayEmptyDataWarning(optionListContainer);
   } else {
     optionArray
       .sort((a, b) => a.localeCompare(b))
@@ -259,4 +257,14 @@ export const createAndDisplayOptionsLists = (recipes) => {
   createAndDisplaySortedOptionLists("ustensils", ustensilsListContainer);
 };
 
+/**
+ * Create and display html to warn about empty data
+ * 
+ * @param {HTMLElement} element element who contains data-empty attribute
+ */
 
+export const createAndDisplayEmptyDataWarning = (element) => {
+  const emptyMessageWarning = element.dataset.empty;
+  const emptyListHtml = `<p>${emptyMessageWarning}</p>`;
+  element.insertAdjacentHTML("beforeend", emptyListHtml);
+};
