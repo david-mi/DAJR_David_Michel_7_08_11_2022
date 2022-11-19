@@ -23,6 +23,7 @@
     @include medium {
       flex: 1;
       justify-content: space-between;
+      max-width: 220px;
     }
 
     span {
