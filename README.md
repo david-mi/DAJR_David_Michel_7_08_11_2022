@@ -8,9 +8,11 @@
 
 ## Installation et mise en route
 
-- Se mettre à la racine du répertoire
+- Se placer à la racine du répertoire
 - `npm install` pour installer toutes les dépendances nécessaires
 - `npm start` pour lancer le serveur **webpack** sur le port **4000**  
+- Se placer sur la branche **dev** pour accéder à la dernière version du projet
+- Se placer sur la branch **second_method** pour accéder au second algorithme `filterRecipes` présent dans **[filter.js](./src/filter.js#L17)**
   
  <br/>
 

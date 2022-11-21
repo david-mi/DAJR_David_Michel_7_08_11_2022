@@ -7,6 +7,7 @@ import { formatString } from "./utils.js";
 /*************** RECIPES *****************/
 /*****************************************/
 
+
 /**
  * @param {string} userInput text input from search input in lowercase
  * @param {string} recipes recipes to filter
