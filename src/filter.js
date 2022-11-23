@@ -62,25 +62,33 @@ export const filterRecipesByTag = (tagName, tagOption, recipes) => {
 export const filterRecipesByTags = (tagOption, recipes) => {
   const filterByTagsCallbacks = {
     ingredients: ({ ingredients }) => {
-      return ingredients.some(({ ingredient }) => {
-        return recipesData.tags.ingredients.some(ingredientTag => {
-          return ingredientTag === ingredient;
+      return recipesData.tags.ingredients.every((ingredientTag) => {
+        return ingredients.some(({ ingredient }) => {
+          return ingredient === ingredientTag;
         });
       });
     },
     appliances: ({ appliance }) => {
-      return recipesData.tags.appliances.some(applianceTag => {
+      return recipesData.tags.appliances.every(applianceTag => {
         return applianceTag === appliance;
       });
     },
     ustensils: ({ ustensils }) => {
-      return ustensils.some((ustensil) => {
-        return recipesData.tags.ustensils.some(ustensilTag => {
-          return ustensilTag === ustensil;
+      return recipesData.tags.ustensils.every((ustensilTag) => {
+        return ustensils.some((ustensil) => {
+          return ustensil === ustensilTag;
         });
       });
     }
   };
+
+  recipes.filter(({ ingredients }) => {
+    return recipesData.tags.ingredients.every((tagIngredient) => {
+      return ingredients.some(({ ingredient }) => {
+        return ingredient === tagIngredient;
+      });
+    });
+  });
 
   return recipes.filter(filterByTagsCallbacks[tagOption]);
 };
