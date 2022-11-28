@@ -3,7 +3,7 @@ import { recipesData } from "./data/recipesData";
 import {
   toggleAdvancedSearchAttributes,
   createOptionListElement,
-  createAndDisplayRecipes,
+  createAndDisplaySortedRecipes,
   createAndDisplayOptionsLists,
   removeTrapFocusOnOption,
   addTrapFocusOnOption,
@@ -70,14 +70,14 @@ function handleMainSearchInput() {
   } else {
     recipesData.filtered = filterRecipes(userInput, recipesData.recipes);
   }
-  console.log(recipesData.filtered);
+
   for (const tagOption in recipesData.tags) {
     if (recipesData.tags[tagOption].length > 0) {
       recipesData.filtered = filterRecipesByTags(tagOption, recipesData.filtered);
     }
   }
 
-  createAndDisplayRecipes(recipesData.filtered);
+  createAndDisplaySortedRecipes(recipesData.filtered);
   createAndDisplayOptionsLists(recipesData.filtered);
   previousInput = userInput;
 }
@@ -121,7 +121,7 @@ export const handleOptionListClick = ({ target }) => {
 
   recipesData.filtered = filterRecipesByTag(tagName, targetOption, recipesData.filtered);
 
-  createAndDisplayRecipes(recipesData.filtered);
+  createAndDisplaySortedRecipes(recipesData.filtered);
   createAndDisplayOptionsLists(recipesData.filtered);
 };
 
@@ -159,7 +159,7 @@ export const handleTagClick = ({ currentTarget }) => {
     }
   }
 
-  createAndDisplayRecipes(recipesData.filtered);
+  createAndDisplaySortedRecipes(recipesData.filtered);
   createAndDisplayOptionsLists(recipesData.filtered);
 };
 

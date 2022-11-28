@@ -62,7 +62,8 @@ const createRecipeIngredientsHtml = (ingredients) => {
  * @param {Recipe[]} recipes 
  */
 
-export const createAndDisplayRecipes = (recipes) => {
+export const createAndDisplaySortedRecipes = (recipes) => {
+  recipes.sort((a, b) => a.name.localeCompare(b.name));
   recipesContainer.innerHTML = "";
 
   if (recipes.length !== 0) {
