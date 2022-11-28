@@ -70,7 +70,7 @@ function handleMainSearchInput() {
   } else {
     recipesData.filtered = filterRecipes(userInput, recipesData.recipes);
   }
-
+  console.log(recipesData.filtered);
   for (const tagOption in recipesData.tags) {
     if (recipesData.tags[tagOption].length > 0) {
       recipesData.filtered = filterRecipesByTags(tagOption, recipesData.filtered);
@@ -139,7 +139,9 @@ export const handleOptionListClick = ({ target }) => {
  */
 
 export const handleTagClick = ({ currentTarget }) => {
-  const userInput = formatString(mainSearchInput.value).trim();
+  const userInput = mainSearchInput.value.length < 3
+    ? ""
+    : formatString(mainSearchInput.value).trim();
 
   const targetOption = currentTarget.dataset.option;
   const tagName = currentTarget.innerText;
