@@ -184,6 +184,8 @@ export const handleTagClick = ({ currentTarget }) => {
 function handleCloseOption({ target }) {
   handleTrapFocusOnOption();
 
+  document.removeEventListener("keydown", handleEnterKeyOnOptions);
+
   const optionInputElement = target.querySelector("input");
   optionInputElement.value = "";
 
@@ -204,10 +206,25 @@ function handleCloseOption({ target }) {
 function handleOpenOption({ target }) {
   handleTrapFocusOnOption();
 
+  document.addEventListener("keydown", handleEnterKeyOnOptions);
+
   const optionInputElement = target.querySelector("input");
   optionInputElement.focus();
 }
 
+
+/**
+ * Enter key handler when options are open
+ * 
+ * @param {KeyboardEvent} event 
+ */
+
+function handleEnterKeyOnOptions(event) {
+  const parentTarget = event.target.parentElement;
+  if (event.key === "Enter" && parentTarget.classList.contains("list")) {
+    handleOptionListClick(event);
+  }
+}
 
 /*****************************************/
 /******* OPTIONS DROPDOWN BUTTON *********/
@@ -227,7 +244,6 @@ function triggerClickOnActiveDropdownButton() {
   const clickEvent = new Event("click");
   currentActiveDropdownButton.dispatchEvent(clickEvent);
 }
-
 
 /*****************************************/
 /************* OPTION INPUT **************/
