@@ -82,14 +82,6 @@ export const filterRecipesByTags = (tagOption, recipes) => {
     }
   };
 
-  recipes.filter(({ ingredients }) => {
-    return recipesData.tags.ingredients.every((tagIngredient) => {
-      return ingredients.some(({ ingredient }) => {
-        return ingredient === tagIngredient;
-      });
-    });
-  });
-
   return recipes.filter(filterByTagsCallbacks[tagOption]);
 };
 
