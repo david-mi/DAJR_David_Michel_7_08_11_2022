@@ -5,8 +5,7 @@ import {
   createOptionListElement,
   createAndDisplaySortedRecipes,
   createAndDisplayOptionsLists,
-  removeTrapFocusOnOption,
-  addTrapFocusOnOption,
+  handleTrapFocusOnOption,
   createTagButton,
   createAndDisplayEmptyDataWarning
 } from "./view.js";
@@ -102,6 +101,7 @@ function handleMainFormSubmit(event) {
  * - Add the new tag name in corresponding tag array in {@link recipesData}
  * - Filter recipes based on previously filtered recipes 
  * - Create and display recipes
+ * - Handle option trap focus
  * 
  * @param {MouseEvent} currentTarget 
  */
@@ -123,6 +123,7 @@ export const handleOptionListClick = ({ target }) => {
 
   createAndDisplaySortedRecipes(recipesData.filtered);
   createAndDisplayOptionsLists(recipesData.filtered);
+  handleTrapFocusOnOption();
 };
 
 
@@ -134,6 +135,7 @@ export const handleOptionListClick = ({ target }) => {
  * - Remove tag name from corresponding tag array in {@link recipesData}
  * - Filter recipes
  * - Create and display recipes
+ * - Handle option trap focus
  * 
  * @param {MouseEvent} currentTarget  
  */
@@ -161,6 +163,7 @@ export const handleTagClick = ({ currentTarget }) => {
 
   createAndDisplaySortedRecipes(recipesData.filtered);
   createAndDisplayOptionsLists(recipesData.filtered);
+  handleTrapFocusOnOption();
 };
 
 
@@ -170,6 +173,7 @@ export const handleTagClick = ({ currentTarget }) => {
 
 
 /**
+ * - Handle option trap focus
  * - Remove focus trap on closed option
  * - Clear option input
  * - Trigger input event to reset option list
@@ -178,7 +182,7 @@ export const handleTagClick = ({ currentTarget }) => {
  */
 
 function handleCloseOption({ target }) {
-  removeTrapFocusOnOption();
+  handleTrapFocusOnOption();
 
   const optionInputElement = target.querySelector("input");
   optionInputElement.value = "";
@@ -189,15 +193,16 @@ function handleCloseOption({ target }) {
 
 
 /**
+ * - Handle option trap focus
  * - Add focus trap on opened option
  * - Put focus on option input
+ * - Handle option trap focus
  * 
  * @param {HTMLElement} target option who got opened
  */
 
 function handleOpenOption({ target }) {
-  const optionChoice = target.dataset.option;
-  addTrapFocusOnOption(optionChoice);
+  handleTrapFocusOnOption();
 
   const optionInputElement = target.querySelector("input");
   optionInputElement.focus();
@@ -247,4 +252,6 @@ export function handleSearchOptionInput({ target }) {
   } else {
     createAndDisplayEmptyDataWarning(optionListContainer);
   }
+
+  handleTrapFocusOnOption();
 }
