@@ -165,31 +165,47 @@ export const createOptionListElement = (option) => {
 
 
 /**
- * Prevent tabbing outside opened options, except for going in browser options
- * @param {"ingredients" | "appliances" | "ustensils"} chosenOption 
+ * If an option list is open, add negative tabIndex on any other element, except displayed options and tags
+ * If no options list are open, remove every negative tabIndex
  */
 
-export const addTrapFocusOnOption = (chosenOption) => {
+export const handleTrapFocusOnOption = () => {
+  const isOptionOpened = document.querySelector(".option[data-display]");
+
+  if (isOptionOpened) {
+    addTrapFocusOnOption();
+  } else {
+    removeTrapFocusOnOption();
+  }
+};
+
+
+
+/**
+ * Add negative tabIndex on any other element, except displayed options and tags
+ */
+
+function addTrapFocusOnOption() {
   const focusableElementsOustideOption = document.querySelectorAll(
-    `input:not([data-option="${chosenOption}"] input),
-     button:not([data-option="${chosenOption}"] button),
-     a`
+    `input:not([data-display] input),
+   button:not([data-display] button, button.tag),
+   a`
   );
   focusableElementsOustideOption.forEach(element => {
     element.tabIndex = "-1";
   });
-};
+}
 
 /**
  * Remove tabIndex attribute on every elements who had it set to -1
  */
 
-export const removeTrapFocusOnOption = () => {
+function removeTrapFocusOnOption() {
   const elementsWithTabIndex = document.querySelectorAll("[tabIndex='-1']");
   elementsWithTabIndex.forEach(element => {
     element.removeAttribute("tabIndex");
   });
-};
+}
 
 
 /**
