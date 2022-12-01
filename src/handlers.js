@@ -250,6 +250,17 @@ function triggerClickOnActiveDropdownButton() {
 /*****************************************/
 
 
+/**
+ *  Gets called when user is typing on options input
+ *  @param {InputEvent} event 
+ * 
+ * - Reset options list innerHTML
+ * - Format user input
+ * - Filter options based on user's input
+ * - Display filtered options or a warning message if empty
+ * - Handle trap focus around options and tags
+ */
+
 export function handleSearchOptionInput({ target }) {
   const targetOption = target.dataset.option;
 

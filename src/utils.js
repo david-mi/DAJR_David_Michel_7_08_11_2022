@@ -13,7 +13,7 @@ const letterEnum = {
 };
 
 /**
- * @param {number} str string to format
+ * @param {string} str string to format
  * @return {string} new formated string to lowerCase with accents replaced
  */
 

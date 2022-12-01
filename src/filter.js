@@ -34,20 +34,41 @@ export const filterRecipes = (userInput, recipes) => {
 
 /**
  * @param {string} userInput text input from search input in lowercase
+ * @param {"ingredients" | "appliances" | "ustensils"} tagOption
  * @param {string} recipes recipes to filter
  * @return {Recipe[]} filtered recipe based on recipe's ingredients, name and description
  */
 
 export const filterRecipesByTag = (tagName, tagOption, recipes) => {
   const filterByTagsCallbacks = {
+    /**
+     * Check if the tagName is present on current recipe ingredients
+     * 
+     * @param {RecipeData} recipes
+     */
+
     ingredients: ({ ingredients }) => {
       return ingredients.some(({ ingredient }) => {
         return ingredient === tagName;
       });
     },
+
+    /**
+     * Check if the tagName is present on current recipe appliances
+     * 
+     * @param {RecipeData} recipes
+     */
+
     appliances: ({ appliance }) => {
       return appliance === tagName;
     },
+
+    /**
+     * Check if the tagName is present on current recipe ustensils
+     * 
+     * @param {RecipeData} recipes
+     */
+
     ustensils: ({ ustensils }) => {
       return ustensils.some((ustensil) => {
         return ustensil === tagName;
@@ -58,9 +79,23 @@ export const filterRecipesByTag = (tagName, tagOption, recipes) => {
   return recipes.filter(filterByTagsCallbacks[tagOption]);
 };
 
+/**
+ * Filter recipes based on tagOption its ossociated tags
+ * 
+ *  @param {"ingredients" | "appliances" | "ustensils"} tagOption tagOption 
+ * @param {Recipe[]} recipes 
+ * @returns {Recipe[]}
+ */
 
 export const filterRecipesByTags = (tagOption, recipes) => {
   const filterByTagsCallbacks = {
+
+    /**
+    * Check if every ingredients on tags are present in the current recipe
+    * 
+    * @param {Recipe} recipes
+    */
+
     ingredients: ({ ingredients }) => {
       return recipesData.tags.ingredients.every((ingredientTag) => {
         return ingredients.some(({ ingredient }) => {
@@ -68,11 +103,25 @@ export const filterRecipesByTags = (tagOption, recipes) => {
         });
       });
     },
+
+    /**
+     * Check if every appliances on tags are present in the current recipe
+     * 
+     * @param {Recipe} recipes
+     */
+
     appliances: ({ appliance }) => {
       return recipesData.tags.appliances.every(applianceTag => {
         return applianceTag === appliance;
       });
     },
+
+    /**
+    * Check if every ustensils on tags are present in the current recipe
+    * 
+    * @param {Recipe} recipes
+    */
+
     ustensils: ({ ustensils }) => {
       return recipesData.tags.ustensils.every((ustensilTag) => {
         return ustensils.some((ustensil) => {
@@ -90,6 +139,13 @@ export const filterRecipesByTags = (tagOption, recipes) => {
 /*************** OPTIONS *****************/
 /*****************************************/
 
+
+/**
+ * Filter displayed options from lists
+ * 
+ * @param {string} userInput user entry
+ * @param {string[]} options 
+ */
 
 export const filterAndSortOptions = (userInput, options) => {
   return options

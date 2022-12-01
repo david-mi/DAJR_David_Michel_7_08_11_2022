@@ -27,6 +27,11 @@
  */
 
 /**
+ * @typedef Appliance
+ * @type {string}
+ */
+
+/**
  * @typedef RecipeData
  * @type {{
  *  filtered: Recipe[],
