@@ -38,58 +38,6 @@ export const filterRecipes = (userInput, recipes) => {
 };
 
 
-/**
- * @param {string} userInput text input from search input in lowercase
- * @param {string} recipes recipes to filter
- * @return {Recipe[]} filtered recipe based on recipe's ingredients, name and description
- */
-
-export const filterRecipesNoIndexOf = (userInput, recipes) => {
-  const filteredRecipes = [];
-
-  function isStrIncluded(strToCompare, str) {
-    if (str.length === 0) return true;
-
-    for (let i = 0; i < strToCompare.length; i++) {
-      let matchCount = 0;
-
-      for (let k = 0; k < str.length; k++) {
-        if (strToCompare[i + k] === str[k]) {
-          matchCount++;
-        } else {
-          matchCount = 0;
-        }
-
-        if (matchCount === str.length) {
-          return true;
-        }
-      }
-    }
-
-    return false;
-  }
-
-  for (let i = 0; i < recipes.length; i++) {
-    if (
-      isStrIncluded(formatString(recipes[i].name), userInput) ||
-      isStrIncluded(formatString(recipes[i].description), userInput)
-    ) {
-      filteredRecipes.push(recipes[i]);
-      continue;
-    }
-
-    for (let j = 0; j < recipes[i].ingredients.length; j++) {
-      if (isStrIncluded(formatString(recipes[i].ingredients[j].ingredient), userInput)) {
-        filteredRecipes.push(recipes[i]);
-        break;
-      }
-    }
-  }
-
-  return filteredRecipes;
-};
-
-
 /*****************************************/
 /***************** TAGS ******************/
 /*****************************************/
