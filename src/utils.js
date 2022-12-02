@@ -8,6 +8,7 @@ const letterEnum = {
   "ù": "u",
   "û": "u",
   "î": "i",
+  "ï": "i",
   "ô": "o",
   "ç": "c"
 };
@@ -20,5 +21,5 @@ const letterEnum = {
 export const formatString = (str) => {
   return str
     .toLowerCase()
-    .replace(/[éàèùâêîôûç]/g, (letter) => letterEnum[letter]);
+    .replace(/[éàèùâêîïôûç]/g, (letter) => letterEnum[letter]);
 };
