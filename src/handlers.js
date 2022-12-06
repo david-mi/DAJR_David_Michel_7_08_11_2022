@@ -52,7 +52,10 @@ optionsElements.forEach(optionElement => {
 
 
 /**
- * Handle user input, then filter and display recipes
+ * - Handle recipes filtering, based on user input
+ * - Takes tags in consideration if they exists
+ * - Display recipes and options
+ * - Set previous user input
  */
 
 function handleMainSearchInput() {
